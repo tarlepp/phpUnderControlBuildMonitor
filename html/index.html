@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="container-fluid container-builds">
+            <div id="container" class="container-fluid container-builds">
 
             </div>
 
@@ -65,5 +65,45 @@
 
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/jquery/jquery-1.9.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+        <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
+        <script src="libs/handlebars/handlebars.js"></script>
+
+        <script src="js/monitor.js"></script>
+
+        <script id="template-build" type="text/x-handlebars-template">
+            <div class="build {{class}}">
+                <div class="title navbar">
+                    <ul class="nav pull-right">
+                        <li><a href="{{link}}" target="_blank"><i class="icon-search"></i></a></li>
+                    </ul>
+                    <h2>{{formatTitle title}}</h2>
+                </div>
+                <div class="content {{getStatusClass description}}">
+                    <div class="status pull-left"></div>
+                    <div class="image pull-right">
+                        <img src="{{getStatusImage description}}" />
+                    </div>
+                    <div class="info">
+                        <h2>{{formatTime updated}}</h2>
+                        <h3>{{description}}</h3>
+                    </div>
+
+                    <div style="clear: both"></div>
+                </div>
+            </div>
+        </script>
+
+        <script id="template-build-row" type="text/x-handlebars-template">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="row-fluid">
+                        {{#each builds}}
+                            {{{content}}}
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </script>
     </body>
 </html>
