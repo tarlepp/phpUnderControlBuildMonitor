@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
+
+
+
+
+<rss version="2.0">
+    <channel>
+
+        <title>CruiseControl Results</title>
+        <link>http://your_url_to_phpundercontrol:8080/cruisecontrol</link>
+        <description>Summary of the project build results.</description>
+        <language>en-us</language>
+
+        <item>
+            <title>Project-Development passed Thu, 14 Mar 2013 19:27:06 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 19:27:06 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project-Development</link>
+        </item>
+
+        <item>
+            <title>Project-Development-Tests passed Mon, 11 Mar 2013 15:37:20 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Mon, 11 Mar 2013 15:37:20 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project-Development-Tests</link>
+        </item>
+
+        <item>
+            <title>Project-Production passed Thu, 14 Mar 2013 18:32:35 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 18:32:35 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project-Production</link>
+        </item>
+
+        <item>
+            <title>Project-Production-Tests passed Wed, 06 Feb 2013 15:05:10 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Wed, 06 Feb 2013 15:05:10 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project-Production-Tests</link>
+        </item>
+
+        <item>
+            <title>OtherProject-Development passed Wed, 13 Mar 2013 19:50:54 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Wed, 13 Mar 2013 19:50:54 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/SomeOtherProject-Development</link>
+        </item>
+
+        <item>
+            <title>OtherProject-Development-Tests passed Mon, 04 Mar 2013 09:42:16 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Mon, 04 Mar 2013 09:42:16 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/SomeOtherProject-Development-Tests</link>
+        </item>
+
+        <item>
+            <title>Project2-Development passed Thu, 14 Mar 2013 18:06:10 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 18:06:10 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project2-Development</link>
+        </item>
+
+        <item>
+            <title>Project2-Devel-Tests passed Tue, 28 Aug 2012 07:45:44 +0300</title>
+            <description>Build passed</description>
+            <pubDate>Tue, 28 Aug 2012 07:45:44 +0300</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/Project2-Devel-Tests</link>
+        </item>
+
+        <item>
+            <title>MajorProject-Developmentpassed Thu, 14 Mar 2013 19:58:43 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 19:58:43 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/MajorProject-Devel</link>
+        </item>
+
+        <item>
+            <title>MajorProject-Devel-Tests passed Tue, 20 Nov 2012 14:45:31 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Tue, 20 Nov 2012 14:45:31 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/MajorProject-Devel-Tests</link>
+        </item>
+
+        <item>
+            <title>MajorProject-Stable passed Thu, 14 Mar 2013 18:00:01 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 18:00:01 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/MajorProject-Stable</link>
+        </item>
+
+        <item>
+            <title>MajorProject-Stable-Tests passed Fri, 14 Dec 2012 14:50:07 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Fri, 14 Dec 2012 14:50:07 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/MajorProject-Stable-Tests</link>
+        </item>
+
+        <item>
+            <title>HugeProject-Development passed Thu, 14 Mar 2013 19:08:06 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 19:08:06 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/HugeProject-Development</link>
+        </item>
+
+        <item>
+            <title>HugeProject-Devel-Tests passed Thu, 12 Jul 2012 15:12:27 +0300</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 12 Jul 2012 15:12:27 +0300</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/HugeProject-Development-Tests</link>
+        </item>
+
+        <item>
+            <title>HugeProject-Stable passed Thu, 14 Mar 2013 18:13:03 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 18:13:03 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/HugeProject-Stable</link>
+        </item>
+
+        <item>
+            <title>HugeProject-Stable-Tests passed Fri, 14 Sep 2012 11:48:23 +0300</title>
+            <description>Build passed</description>
+            <pubDate>Fri, 14 Sep 2012 11:48:23 +0300</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/HugeProject-Stable-Tests</link>
+        </item>
+
+        <item>
+            <title>TremendousProject-Development FAILED Sun, 10 Mar 2013 12:00:17 +0200</title>
+            <description>Build FAILED</description>
+            <pubDate>Sun, 10 Mar 2013 12:00:17 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/TremendousProject-Development</link>
+        </item>
+
+        <item>
+            <title>TremendousProject-Devel-Tests FAILED Wed, 13 Mar 2013 23:59:43 +0200</title>
+            <description>Build FAILED</description>
+            <pubDate>Wed, 13 Mar 2013 23:59:43 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/TremendousProject-Devel-Development</link>
+        </item>
+
+        <item>
+            <title>TremendousProject-Devel-Tests-Unit passed Thu, 14 Mar 2013 16:09:32 +0200</title>
+            <description>Build passed</description>
+            <pubDate>Thu, 14 Mar 2013 16:09:32 +0200</pubDate>
+            <link>http://your_url_to_phpundercontrol:8080/cruisecontrol/buildresults/TremendousProject-Devel-Tests-Unit</link>
+        </item>
+
+    </channel>
+</rss>
