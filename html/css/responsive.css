@@ -11,7 +11,7 @@
 }
 
 @media (min-width: 1200px) {
-    .container-builds .row-fluid {
+    .container-builds .row-fluid .row-fluid {
         margin-bottom: 0.56410256410256%;
     }
 
