@@ -28,32 +28,6 @@ jQuery(document).ready(function() {
         type: "post"
     });
 
-    Handlebars.registerHelper('formatTime', function(time) {
-        var date = new Date(Date.parse(time));
-
-        var dateBits = [
-            date.getFullYear(),
-            parseInt(date.getMonth(), 10) + 1,
-            date.getDate()
-        ];
-
-        var timeBits = [
-            date.getHours(),
-            date.getMinutes(),
-            date.getSeconds()
-        ];
-
-        dateBits = jQuery.map(dateBits, function(value, index) {
-            return (String(value).length == 1) ? "0" + value : value;
-        });
-
-        timeBits = jQuery.map(timeBits, function(value, index) {
-            return (String(value).length == 1) ? "0" + value : value;
-        });
-
-        return dateBits.join('.') + " " + timeBits.join(':');
-    });
-
     Handlebars.registerHelper('getStatusClass', function(description) {
         return (String(description).search('passed') == -1) ? 'alert-error' : 'alert-success';
     });
@@ -104,7 +78,9 @@ jQuery(document).ready(function() {
                     wrapClass = 'wrapError';
                 }
 
-                builds.push({content: template(jQuery.extend(item, options, {index: index}))});
+                var build = template(jQuery.extend(item, options, {index: index}));
+
+                builds.push({content: build});
             });
 
             source = jQuery("#template-build-row").html();
@@ -113,6 +89,8 @@ jQuery(document).ready(function() {
             jQuery.each(builds.chunk(options.perRow), function(index, item) {
                 content.append(template({builds: item}));
             });
+
+            content.find('.content h2 time.timeago').timeago();
 
             jQuery('#wrap').removeClass().addClass(wrapClass);
         },

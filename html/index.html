@@ -68,6 +68,7 @@
         <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
         <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
         <script src="libs/handlebars/handlebars.js"></script>
+        <script src="libs/timeago/jquery.timeago.js"></script>
 
         <script src="js/monitor.js"></script>
 
@@ -85,7 +86,7 @@
                         <img id="image_{{index}}" src="{{getStatusImage description index}}" />
                     </div>
                     <div class="info">
-                        <h2>{{formatTime updated}}</h2>
+                        <h2><time class="timeago" datetime="{{updated}}">{{updated}}</time></h2>
                         <h3>{{description}}</h3>
                     </div>
 
