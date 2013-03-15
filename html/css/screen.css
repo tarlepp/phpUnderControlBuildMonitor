@@ -52,8 +52,17 @@ body {
     text-decoration: none;
 }
 
+.wrapSuccess {
+    background-color: #309b30;
+}
+
+.wrapError {
+    background-color: red;
+}
+
 .container-builds {
     margin-top: 50px;
+    z-index: 100;
 }
 
 .container-builds .build:hover {
@@ -87,11 +96,11 @@ body {
 
 .build.alert-error .title {
     background-color: red;
-    background-image: -moz-linear-gradient(top, #F2DEDE, red);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F2DEDE), to(red));
-    background-image: -webkit-linear-gradient(top, #F2DEDE, red);
-    background-image: -o-linear-gradient(top, #F2DEDE, red);
-    background-image: linear-gradient(to bottom, #F2DEDE, red);
+    background-image: -moz-linear-gradient(top, #dcc8c8, red);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dcc8c8), to(red));
+    background-image: -webkit-linear-gradient(top, #dcc8c8, red);
+    background-image: -o-linear-gradient(top, #dcc8c8, red);
+    background-image: linear-gradient(to bottom, #dcc8c8, red);
 }
 
 .build .title h2 {
@@ -101,9 +110,9 @@ body {
     line-height: 16px;
     margin: 0 25px 0 8px;
     padding: 0;
-    font-weight: normal;
+    font-weight: bold;
     color: #FFFFFF;
-    text-shadow: 1px 1px 0 #000000;
+    text-shadow: -1px -1px 3px #000000;
 }
 
 .build .navbar .nav {
@@ -123,7 +132,7 @@ body {
 
 .build .title,
 .build .content {
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .build .title {
@@ -170,6 +179,7 @@ body {
 
 .build.alert-success .status {
     background-color: green;
+
 }
 
 .build.alert-error .status {
@@ -192,6 +202,7 @@ body {
     -moz-box-shadow: 0 1px 7px rgba(0, 0, 0, 0.8);
     box-shadow: 0 1px 7px rgba(0, 0, 0, 0.8);
     border: 1px solid  rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .build.alert-success .image img {
