@@ -17,7 +17,7 @@ use phpUnderControlBuildMonitor\Core\Exception as CException;
  *
  * @package     phpUnderControlBuildMonitor
  * @subpackage  Util
- * @category    Session
+ * @category    Exception
  *
  * @author      Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
