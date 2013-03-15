@@ -36,6 +36,7 @@ class System implements Interfaces\System
      * @var string
      */
     public static $baseHref = '';
+    public static $basePath = '';
     public static $csrfToken = '';
     /**#@-*/
 
@@ -235,6 +236,9 @@ class System implements Interfaces\System
     {
         // Store site base href url
         self::$baseHref = $this->request->getBaseHref(false, true);
+
+        // Store site base path
+        self::$basePath = dirname(dirname(dirname(__FILE__))) . DS;
 
         // Try to fetch token from session
         $token = $this->request->getSession('token', null);
