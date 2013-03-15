@@ -1,8 +1,12 @@
 jQuery(document).ready(function() {
     // Common AJAX setup
     jQuery.ajaxSetup({
+        url: baseHref + 'service.php',
         data: {
+            token: csrfToken
         },
+        dataType: "json",
+        type: "post",
         error: function(jqXHR, exception) {
             var message = '';
 
@@ -23,10 +27,10 @@ jQuery(document).ready(function() {
             }
 
             makeMessage(message, 'error', {timeout: 5000});
-        },
-        dataType: "json",
-        type: "post"
+        }
     });
+
+    var container = jQuery('#container');
 
     Handlebars.registerHelper('getStatusClass', function(description) {
         return (String(description).search('passed') == -1) ? 'alert-error' : 'alert-success';
@@ -42,28 +46,22 @@ jQuery(document).ready(function() {
         var failed = (String(description).search('passed') == -1);
 
         jQuery.ajax({
-            url: 'service.php',
             data: {
-                type: 'image',
+                service: 'Image',
                 failed: failed
             },
-            success: function(data) {
-                // TODO: implement image replace
+            success: function(image) {
+                var imgElement = container.find('#image_' + index);
+
+                imgElement.attr('src', image);
             }
         });
-
-        if (!failed) {
-            return "images/success/chuck-norris-approved.png";
-        } else {
-            return index;
-        }
     });
 
     jQuery.getFeed({
         url: 'feed.xml',
-        success: function(feed) {
+        success: function(/*phpUnderControl.Feed*/feed) {
             var wrapClass = 'wrapSuccess';
-            var content = jQuery('#container');
             var source = jQuery("#template-build").html();
             var template = Handlebars.compile(source);
             var options = {
@@ -73,24 +71,22 @@ jQuery(document).ready(function() {
 
             var builds = [];
 
-            jQuery.each(feed.items, function(index, item) {
+            jQuery.each(feed.items, function(index, /*phpUnderControl.Feed.item*/item) {
                 if ((String(item.description).search('passed') == -1)) {
                     wrapClass = 'wrapError';
                 }
 
-                var build = template(jQuery.extend(item, options, {index: index}));
-
-                builds.push({content: build});
+                builds.push({content: template(jQuery.extend(item, options, {index: index}))});
             });
 
             source = jQuery("#template-build-row").html();
             template = Handlebars.compile(source);
 
             jQuery.each(builds.chunk(options.perRow), function(index, item) {
-                content.append(template({builds: item}));
+                container.append(template({builds: item}));
             });
 
-            content.find('.content h2 time.timeago').timeago();
+            container.find('.content h2 time.timeago').timeago();
 
             jQuery('#wrap').removeClass().addClass(wrapClass);
         },
@@ -102,6 +98,7 @@ jQuery(document).ready(function() {
 
 function makeMessage(text, type, options) {
     // TODO: implement this
+    alert(text);
 }
 
 Array.prototype.chunk = function ( n ) {

@@ -32,7 +32,7 @@ require_once dirname(dirname(__FILE__)) . DS . "php" . DS . "init.php";
 
         <script type="text/javascript">
             var baseHref = '<?php echo System::$baseHref; ?>';
-            var token = '<?php echo System::$csrfToken; ?>';
+            var csrfToken = '<?php echo System::$csrfToken; ?>';
         </script>
 
     </head>
