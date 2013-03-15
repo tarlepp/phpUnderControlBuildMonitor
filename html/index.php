@@ -1,3 +1,21 @@
+<?php
+/**
+ * Main php functionality for all AJAX requests
+ */
+use \phpUnderControlBuildMonitor\Core\System;
+
+// We want to show all errors.
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 1);
+
+// Specify initialize time
+define('TIMESTART', str_replace(',', '.', microtime(true)));
+define('DS', DIRECTORY_SEPARATOR);
+
+// Require system init file
+require_once dirname(dirname(__FILE__)) . DS . "php" . DS . "init.php";
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,6 +29,12 @@
 
         <link href="css/screen.css" rel="stylesheet" media="screen">
         <link href="css/responsive.css" rel="stylesheet" media="screen">
+
+        <script type="text/javascript">
+            var baseHref = '<?php echo System::$baseHref; ?>';
+            var token = '<?php echo System::$csrfToken; ?>';
+        </script>
+
     </head>
     <body>
 
