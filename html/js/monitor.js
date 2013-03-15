@@ -64,19 +64,31 @@ jQuery(document).ready(function() {
         return title.substring(0, title.search(" "));
     });
 
-    Handlebars.registerHelper('getStatusImage', function(description) {
+    Handlebars.registerHelper('getStatusImage', function(description, index) {
         var failed = (String(description).search('passed') == -1);
+
+        jQuery.ajax({
+            url: 'service.php',
+            data: {
+                type: 'image',
+                failed: failed
+            },
+            success: function(data) {
+                // TODO: implement image replace
+            }
+        });
 
         if (!failed) {
             return "images/success/chuck-norris-approved.png";
         } else {
-            return "";
+            return index;
         }
     });
 
     jQuery.getFeed({
         url: 'feed.xml',
         success: function(feed) {
+            var wrapClass = 'wrapSuccess';
             var content = jQuery('#container');
             var source = jQuery("#template-build").html();
             var template = Handlebars.compile(source);
@@ -88,7 +100,11 @@ jQuery(document).ready(function() {
             var builds = [];
 
             jQuery.each(feed.items, function(index, item) {
-                builds.push({content: template(jQuery.extend(item, options))});
+                if ((String(item.description).search('passed') == -1)) {
+                    wrapClass = 'wrapError';
+                }
+
+                builds.push({content: template(jQuery.extend(item, options, {index: index}))});
             });
 
             source = jQuery("#template-build-row").html();
@@ -97,6 +113,8 @@ jQuery(document).ready(function() {
             jQuery.each(builds.chunk(options.perRow), function(index, item) {
                 content.append(template({builds: item}));
             });
+
+            jQuery('#wrap').removeClass().addClass(wrapClass);
         },
         error: function() {
             alert('error');
