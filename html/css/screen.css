@@ -22,8 +22,7 @@ body {
 #footer {
     line-height: 30px;
     color: #999;
-    background-color: #1b1b1b;
-    border-top: 1px solid #252525;
+    background-color: #000000;
     padding: 0 10px;
     text-align: center;
     z-index: 900;
@@ -58,35 +57,53 @@ body {
 }
 
 .container-builds .build:hover {
-    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-    -moz-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
 }
 
-.build .title {
-    min-height: 20px;
-    margin: 0;
-    padding: 5px 0 3px 0;
-    border: 1px solid #c8c8c8;
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
-    background-color: #fafafa;
-    background-image: -moz-linear-gradient(top, #ffffff, #d2d2d2);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#d2d2d2));
-    background-image: -webkit-linear-gradient(top, #ffffff, #d2d2d2);
-    background-image: -o-linear-gradient(top, #ffffff, #d2d2d2);
-    background-image: linear-gradient(to bottom, #ffffff, #d2d2d2);
+.build.alert-success,
+.build.alert-error {
+    border: none;
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.build.alert-success .content {
+    background-color: #dff0d8;
+}
+.build.alert-error .content {
+    background-color: #f2dede;
+}
+
+.build.alert-success .title {
+    background-color: green;
+    background-image: -moz-linear-gradient(top, #bccdb8, green);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#bccdb8), to(green));
+    background-image: -webkit-linear-gradient(top, #bccdb8, green);
+    background-image: -o-linear-gradient(top, #bccdb8, green);
+    background-image: linear-gradient(to bottom, #bccdb8, green);
+}
+
+.build.alert-error .title {
+    background-color: red;
+    background-image: -moz-linear-gradient(top, #F2DEDE, red);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F2DEDE), to(red));
+    background-image: -webkit-linear-gradient(top, #F2DEDE, red);
+    background-image: -o-linear-gradient(top, #F2DEDE, red);
+    background-image: linear-gradient(to bottom, #F2DEDE, red);
 }
 
 .build .title h2 {
     position: relative;
-    top: 2px;
+    top: 1px;
     font-size: 16px;
     line-height: 16px;
     margin: 0 25px 0 8px;
     padding: 0;
-    font-weight: bold;
+    font-weight: normal;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 0 #000000;
 }
 
 .build .navbar .nav {
@@ -104,11 +121,24 @@ body {
     opacity: 1;
 }
 
+.build .title,
 .build .content {
-    border: 1px solid #c8c8c8;
-    border-top: none;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.build .title {
+    min-height: 20px;
+    margin: 0;
+    padding: 5px 0 3px 0;
+    border-bottom: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.build .content {
+    border-top: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
     margin: 0;
     padding: 5px;
 }
@@ -138,11 +168,11 @@ body {
     border: 1px solid  rgba(0, 0, 0, 0.2);
 }
 
-.build .alert-success .status {
+.build.alert-success .status {
     background-color: green;
 }
 
-.build .alert-error .status {
+.build.alert-error .status {
     background-color: red;
 }
 
@@ -164,7 +194,7 @@ body {
     border: 1px solid  rgba(0, 0, 0, 0.2);
 }
 
-.build .content.alert-success .image img {
+.build.alert-success .image img {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
