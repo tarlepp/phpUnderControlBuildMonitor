@@ -32,7 +32,7 @@ class Autoload implements Interfaces\Autoload
      */
     public function __construct()
     {
-        $this->path = dirname(dirname(__FILE__)) . DS;
+        $this->path = dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR;
     }
 
     /**
@@ -58,8 +58,8 @@ class Autoload implements Interfaces\Autoload
         }
 
         if (isset($bits) && is_array($bits) && count($bits) > 0) {
-            $classDir  = implode(DS, $bits);
-            $classFile = $this->path . $classDir . DS . $class . ".php";
+            $classDir  = implode(DIRECTORY_SEPARATOR, $bits);
+            $classFile = $this->path . $classDir . DIRECTORY_SEPARATOR . $class . ".php";
 
             if (is_readable($classFile)) {
                 require_once $classFile;

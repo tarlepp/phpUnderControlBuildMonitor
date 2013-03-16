@@ -238,7 +238,7 @@ class System implements Interfaces\System
         self::$baseHref = $this->request->getBaseHref(false, true);
 
         // Store site base path
-        self::$basePath = dirname(dirname(dirname(__FILE__))) . DS;
+        self::$basePath = dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR;
 
         // Try to fetch token from session
         $token = $this->request->getSession('token', null);

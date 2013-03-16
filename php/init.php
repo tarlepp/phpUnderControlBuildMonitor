@@ -13,9 +13,25 @@
  */
 use phpUnderControlBuildMonitor\Core\System;
 
-// HomeAI autoload classes
-require_once dirname(__FILE__) . DS . 'Core' . DS . 'Interfaces' . DS . 'Autoload.php';
-require_once dirname(__FILE__) . DS . 'Core' . DS . 'Autoload.php';
+// Used base files to use
+$files = array(
+    array(
+        dirname(__FILE__),
+        'Core',
+        'Interfaces',
+        'Autoload.php'
+    ),
+    array(
+        dirname(__FILE__),
+        'Core',
+        'Autoload.php'
+    ),
+);
+
+// Require defined base files
+foreach ($files as $file) {
+    require_once implode(DIRECTORY_SEPARATOR, $file);
+}
 
 // Register autoload functionality
 spl_autoload_register(array(new \phpUnderControlBuildMonitor\Core\Autoload(), 'load'));
