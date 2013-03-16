@@ -3,10 +3,12 @@
  *
  * @author  Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
+
+// Basic variables
 var baseHref = '';
 var csrfToken = '';
 
-
+// JSON objects
 var phpUnderControl = {
     Feed: {
         type: '',
@@ -29,6 +31,10 @@ var phpUnderControl = {
                 }
             }
         ]
+    },
+    Images: {
+        fails: [],
+        success: []
     },
     Error: {
         message: '',

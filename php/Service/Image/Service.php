@@ -43,18 +43,45 @@ class Service extends Handler
     );
 
     /**
-     * Method handles current service request. Basically method returns an image
-     * url for 'success' or 'fails' image type.
+     * Method returns an array of fail and success images. Output is a multidimensional
+     * array which contains request count of images. Actual image values are direct urls
+     * to them.
      *
-     * @return  string|array|object|bool
+     * @return  array   Array of fail and success images
      */
     public function handleRequestDefault()
     {
-        // Determine image type
-        $type = (bool)$this->request->get('failed', true) ? self::TYPE_FAILS : self::TYPE_SUCCESS;
+        // Initialize used image arrays
+        $imagesFails = $imagesSuccess = array();
 
-        // Return random image from pool
-        return count($this->images[$type]) > 0 ? $this->images[$type][array_rand($this->images[$type], 1)] : false;
+        // Iterate images
+        foreach ($this->images as $type => $images) {
+            // Determine request count of images
+            $imageCount = (int)$this->request->get('cnt' . ucfirst($type), 0);
+            $imageArray = 'images' . ucfirst($type);
+
+            $count = count($images);
+
+            // We don't have required amount of images
+            while ($imageCount > count($images)) {
+                // Only one image, so do not make unnecessary random for images
+                if ($count === 1) {
+                    $images[] = current($images);
+                } else { // Otherwise select random key from array
+                    $images[] = $images[array_rand($images)];
+                }
+            }
+
+            // Get request count of random images from current images array
+            ${$imageArray} = array_values(array_intersect_key($images, array_flip(array_rand($images, $imageCount))));
+        }
+
+        $data = array(
+            self::TYPE_FAILS    => $imagesFails,
+            self::TYPE_SUCCESS  => $imagesSuccess,
+        );
+
+        return $data;
     }
 
     /**
@@ -72,10 +99,18 @@ class Service extends Handler
             // Specify current image path
             $imagePath = $path . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR;
 
-            // Iterate image files and add them to main data array
-            foreach (glob($imagePath . '*{.jpg,.png}', GLOB_BRACE) as $imageFile) {
-                $this->images[$type][] = $imageFile;
+            // Fetch images
+            $images = glob($imagePath . '*{.jpg,.png}', GLOB_BRACE);
+
+            if (count($images) > 0) {
+                // Iterate image files and add them to main data array
+                foreach ($images as $imageFile) {
+                    $this->images[$type][] = $imageFile;
+                }
+            } else {
+                $this->images[$type][] = false;
             }
+
 
             // Convert image files to URIs
             array_walk($this->images[$type], array($this, 'convertImagePathToUrl'));

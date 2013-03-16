@@ -167,6 +167,10 @@ body {
     margin: 0;
 }
 
+.build .content a.colorbox {
+    display: none;
+}
+
 .build .content .status,
 .build .content .image {
     width: 80px;

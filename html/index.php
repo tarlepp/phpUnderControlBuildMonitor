@@ -106,7 +106,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 <div class="content">
                     <div class="status pull-left"></div>
                     <div class="image pull-right">
-                        <a id="href_{{index}}" href="#" class="colorbox" title="{{description}}"><img id="image_{{index}}" src="{{getStatusImage description index}}" /></a>
+                        <a id="href_{{index}}" href="#" class="colorbox" title="{{description}}"><img id="image_{{index}}" src="#" /></a>
                     </div>
                     <div class="info">
                         <h2><time class="timeago" datetime="{{updated}}">{{updated}}</time></h2>
@@ -129,16 +129,30 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
             </div>
         </script>
 
-        <script id="template-error-bootbox" type="text/x-handlebars-template">
+        <script id="template-error-exception" type="text/x-handlebars-template">
             <div class="error-bootbox">
                 <div class="alert alert-error">
                     <h2>Error</h2>
                     <p>
                         {{message}}
                     </p>
-                    <h3>Trace</h3>
+                    <h3>Information</h3>
                     <pre class="pre-scrollable text-mini">{{file}}:{{line}}</pre>
                     <pre class="pre-scrollable text-mini">{{trace}}</pre>
+                </div>
+            </div>
+        </script>
+
+        <script id="template-error-common" type="text/x-handlebars-template">
+            <div class="error-bootbox">
+                <div class="alert alert-error">
+                    <h2>Error</h2>
+                    <p>
+                        {{message}}
+                    </p>
+                    <h3>Information</h3>
+                    <pre class="pre-scrollable text-mini">HTTP status {{status}}</pre>
+                    <pre class="pre-scrollable text-mini">{{responseText}}</pre>
                 </div>
             </div>
         </script>
