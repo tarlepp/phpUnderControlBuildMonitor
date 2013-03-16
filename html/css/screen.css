@@ -52,6 +52,10 @@ body {
     text-decoration: none;
 }
 
+*:focus {
+    outline: none;
+}
+
 .wrapSuccess {
     background-color: #309b30;
 }
@@ -179,7 +183,6 @@ body {
 
 .build.alert-success .status {
     background-color: green;
-
 }
 
 .build.alert-error .status {
@@ -210,4 +213,59 @@ body {
     -moz-box-shadow: none;
     box-shadow: none;
     border: none;
+}
+
+#cboxOverlay {
+    background: #1e1e1e;
+}
+
+#cboxTopLeft,
+#cboxTopCenter,
+#cboxTopRight,
+#cboxBottomLeft,
+#cboxBottomCenter,
+#cboxBottomRight,
+#cboxMiddleLeft,
+#cboxMiddleRight {
+    background: #E6E5E5 none;
+}
+
+#cboxTopLeft {
+    border-top-left-radius: 10px;
+}
+
+#cboxTopRight {
+    border-top-right-radius: 10px;
+}
+
+#cboxBottomRight {
+    border-bottom-right-radius: 10px;
+}
+
+#cboxBottomLeft {
+    border-bottom-left-radius: 10px;
+}
+
+#cboxContent,
+#cboxBottomCenter {
+    background-color: #E6E5E5;
+}
+
+#cboxClose {
+    bottom: -30px;
+}
+
+#cboxTitle {
+    bottom: -30px;
+    text-shadow: 2px 2px 1px #ffffff;
+    color: #222;
+    font-size: 20px;
+}
+
+#cboxLoadedContent {
+    border-radius: 10px;
+}
+
+#cboxLoadingGraphic {
+    background: url(../images/loading.gif) no-repeat center center;
 }

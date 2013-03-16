@@ -52,11 +52,13 @@ jQuery(document).ready(function() {
             },
             success: function(image) {
                 var imgElement = container.find('#image_' + index);
+                var hrefElement = container.find('#href_' + index);
 
                 if (image == false) {
-                    imgElement.hide();
+                    hrefElement.hide();
                 } else {
                     imgElement.attr('src', image);
+                    hrefElement.attr('href', image);
                 }
             }
         });
@@ -91,12 +93,26 @@ jQuery(document).ready(function() {
             });
 
             container.find('.content h2 time.timeago').timeago();
+            container.find('.content .colorbox').colorbox({opacity: 0.7, maxHeight: '90%'});
 
             jQuery('#wrap').removeClass().addClass(wrapClass);
-        },
-        error: function() {
-            alert('error');
         }
+    });
+
+    var interval = 0;
+
+    container.on('mouseover', '.content .colorbox', function() {
+        var id = jQuery(this).prop('id');
+
+        interval = setInterval(function() {
+            jQuery('#' + id).colorbox({open:true});
+
+            clearInterval(interval);
+        }, 750);
+    });
+
+    container.on('mouseout', '.content .colorbox', function() {
+        clearInterval(interval);
     });
 });
 

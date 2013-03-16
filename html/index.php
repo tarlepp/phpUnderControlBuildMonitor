@@ -21,6 +21,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
         <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="libs/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="libs/colorbox/css/colorbox.css" rel="stylesheet" media="screen">
         <link href='http://fonts.googleapis.com/css?family=Cuprum:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
         <link href="css/screen.css" rel="stylesheet" media="screen">
@@ -89,6 +90,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
         <script src="libs/handlebars/handlebars.js"></script>
         <script src="libs/timeago/jquery.timeago.js"></script>
+        <script src="libs/colorbox/js/jquery.colorbox-min.js"></script>
 
         <script src="js/monitor.js"></script>
 
@@ -103,7 +105,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 <div class="content">
                     <div class="status pull-left"></div>
                     <div class="image pull-right">
-                        <img id="image_{{index}}" src="{{getStatusImage description index}}" />
+                        <a id="href_{{index}}" href="#" class="colorbox" title="{{description}}"><img id="image_{{index}}" src="{{getStatusImage description index}}" /></a>
                     </div>
                     <div class="info">
                         <h2><time class="timeago" datetime="{{updated}}">{{updated}}</time></h2>
