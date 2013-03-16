@@ -98,7 +98,7 @@ jQuery(document).ready(function() {
 
 function makeMessage(text, type, options) {
     // TODO: implement this
-    alert(text);
+    console.log(text);
 }
 
 Array.prototype.chunk = function ( n ) {

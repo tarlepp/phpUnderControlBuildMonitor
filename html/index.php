@@ -8,12 +8,8 @@ use \phpUnderControlBuildMonitor\Core\System;
 error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 
-// Specify initialize time
-define('TIMESTART', str_replace(',', '.', microtime(true)));
-define('DS', DIRECTORY_SEPARATOR);
-
 // Require system init file
-require_once dirname(dirname(__FILE__)) . DS . "php" . DS . "init.php";
+require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTORY_SEPARATOR . "init.php";
 
 ?>
 <!DOCTYPE html>

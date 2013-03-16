@@ -18,7 +18,7 @@ use phpUnderControlBuildMonitor\Util\JSON;
  *
  * @package     phpUnderControlBuildMonitor
  * @subpackage  Core
- * @category    Session
+ * @category    Exception
  *
  * @author      Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
@@ -67,6 +67,7 @@ class Exception extends \Exception
         header("HTTP/1.0 400 Bad Request");
 
         JSON::makeHeaders();
+
         echo JSON::encode(array('error' => $data));
 
         exit(0);
