@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
     });
 
     Handlebars.registerHelper('getStatusImage', function(description, index) {
-        var failed = (String(description).search('passed') == -1);
+        var failed = (String(description).search('passed') == -1) ? 1 : 0;
 
         jQuery.ajax({
             data: {
@@ -53,7 +53,11 @@ jQuery(document).ready(function() {
             success: function(image) {
                 var imgElement = container.find('#image_' + index);
 
-                imgElement.attr('src', image);
+                if (image == false) {
+                    imgElement.hide();
+                } else {
+                    imgElement.attr('src', image);
+                }
             }
         });
     });

@@ -86,6 +86,19 @@ abstract class Handler implements Interfaces\Handler
             throw new Exception("Request service method for '" . $this->action . "' action not found.");
         }
 
+        // Specify init methods to check
+        $init = array(
+            'initializeRequest',
+            'initializeRequest'. $this->action,
+        );
+
+        // Iterate initialize methods and call them if founded
+        foreach ($init as $initMethod) {
+            if (method_exists($this, $initMethod)) {
+                call_user_func(array($this, $initMethod));
+            }
+        }
+
         JSON::makeHeaders();
 
         echo JSON::encode(call_user_func(array($this, $method)));
