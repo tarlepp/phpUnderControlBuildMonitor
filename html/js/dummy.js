@@ -29,5 +29,12 @@ var phpUnderControl = {
                 }
             }
         ]
+    },
+    Error: {
+        message: '',
+        code: '',
+        file: '',
+        line: '',
+        trace: ''
     }
 };

@@ -60,8 +60,9 @@ class Exception extends \Exception
         $data = array(
             'message'   => $this->getMessage(),
             'code'      => $this->getCode(),
-            'file'      => $this->getFile(),
+            'file'      => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getFile()),
             'line'      => $this->getLine(),
+            'trace'     => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getTraceAsString()),
         );
 
         header("HTTP/1.0 400 Bad Request");

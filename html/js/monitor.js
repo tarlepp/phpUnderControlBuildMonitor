@@ -26,7 +26,21 @@ jQuery(document).ready(function() {
                 message = 'Uncaught Error.\n' + jqXHR.responseText;
             }
 
-            makeMessage(message, 'error', {timeout: 5000});
+            if (isJsonString(jqXHR.responseText)) {
+                var data = JSON.parse(jqXHR.responseText);
+
+                if (/*phpUnderControl.Error*/data.error) {
+                    var source = jQuery("#template-error-bootbox").html();
+                    var template = Handlebars.compile(source);
+
+                    message = template(data.error);
+                }
+            }
+
+            bootbox.dialog(message, {
+                "label" : "Close",
+                "class" : "btn"
+            });
         }
     });
 
@@ -93,7 +107,7 @@ jQuery(document).ready(function() {
             });
 
             container.find('.content h2 time.timeago').timeago();
-            container.find('.content .colorbox').colorbox({opacity: 0.7, maxHeight: '90%'});
+            container.find('.content .colorbox').colorbox({opacity: 0.8, maxHeight: '90%'});
 
             jQuery('#wrap').removeClass().addClass(wrapClass);
         }
@@ -114,11 +128,24 @@ jQuery(document).ready(function() {
     container.on('mouseout', '.content .colorbox', function() {
         clearInterval(interval);
     });
+
+    jQuery('#header').on('click', '#setupLink', function(event) {
+        jQuery.ajax({
+            data: {
+                service: 'Setup'
+            }
+        });
+    })
 });
 
-function makeMessage(text, type, options) {
-    // TODO: implement this
-    console.log(text);
+function isJsonString(string) {
+    try {
+        JSON.parse(string);
+    } catch (e) {
+        return false;
+    }
+
+    return true;
 }
 
 Array.prototype.chunk = function ( n ) {

@@ -269,3 +269,39 @@ body {
 #cboxLoadingGraphic {
     background: url(../images/loading.gif) no-repeat center center;
 }
+
+.text-mini {
+    font-size: 12px;
+}
+
+.bootbox .modal-body h2 {
+    margin-top: 0;
+    font-size: 22px;
+    line-height: 22px;
+    border-bottom: 1px solid;
+}
+
+.bootbox .modal-body h3 {
+    font-size: 18px;
+    line-height: 18px;
+    border-bottom: 1px solid;
+}
+
+.bootbox .modal-body p {
+    font-size: 14px;
+}
+
+.bootbox .modal-body,
+.bootbox .modal-footer {
+    padding: 7px
+}
+
+.bootbox .modal-body .alert,
+.bootbox .modal-body .alert pre:last-of-type {
+    margin-bottom: 0;
+}
+
+.bootbox .modal-body .alert-error {
+    padding: 7px;
+    border-radius: 6px;
+}

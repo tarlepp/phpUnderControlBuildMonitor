@@ -36,7 +36,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
     <body>
 
         <div id="wrap">
-            <div class="header container-fluid">
+            <div id="header" class="header container-fluid">
                 <div class="navbar navbar-inverse navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
@@ -56,7 +56,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
                                 <ul class="nav pull-right">
                                     <li>
-                                        <a href="#">Setup</a>
+                                        <a href="#" id="setupLink">Setup</a>
                                     </li>
                                 </ul>
                             </div>
@@ -84,9 +84,10 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
             </div>
         </div>
 
-        <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/jquery/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+        <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+        <script src="libs/bootbox/bootbox.min.js"></script>
         <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
         <script src="libs/handlebars/handlebars.js"></script>
         <script src="libs/timeago/jquery.timeago.js"></script>
@@ -111,7 +112,6 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                         <h2><time class="timeago" datetime="{{updated}}">{{updated}}</time></h2>
                         <h3>{{description}}</h3>
                     </div>
-
                     <div style="clear: both"></div>
                 </div>
             </div>
@@ -125,6 +125,20 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                             {{{content}}}
                         {{/each}}
                     </div>
+                </div>
+            </div>
+        </script>
+
+        <script id="template-error-bootbox" type="text/x-handlebars-template">
+            <div class="error-bootbox">
+                <div class="alert alert-error">
+                    <h2>Error</h2>
+                    <p>
+                        {{message}}
+                    </p>
+                    <h3>Trace</h3>
+                    <pre class="pre-scrollable text-mini">{{file}}:{{line}}</pre>
+                    <pre class="pre-scrollable text-mini">{{trace}}</pre>
                 </div>
             </div>
         </script>
