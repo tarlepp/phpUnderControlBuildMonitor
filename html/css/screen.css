@@ -52,7 +52,8 @@ body {
     text-decoration: none;
 }
 
-*:focus {
+*:focus,
+a:focus {
     outline: none;
 }
 
@@ -278,6 +279,28 @@ body {
     font-size: 12px;
 }
 
+.bootbox .modal-header {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #ddd;
+    -webkit-box-shadow: inset 0 -1px 0 #ffffff;
+    -moz-box-shadow: inset 0 -1px 0 #ffffff;
+    box-shadow: inset 0 -1px 0 #ffffff;
+}
+
+.bootbox .modal-header h3 {
+    font-size: 20px;
+    text-shadow: 2px 2px 1px #ffffff;
+}
+
+.bootbox .modal-header .close {
+    font-size: 35px;
+    margin-top: 7px;
+}
+
+.bootbox .modal-header .close:hover {
+    opacity: 1;
+}
+
 .bootbox .modal-body h2,
 .bootbox .modal-body h3 {
     border-bottom: 1px solid;
@@ -296,6 +319,69 @@ body {
 
 .bootbox .modal-body p {
     font-size: 14px;
+}
+
+.bootbox .modal-body form {
+    margin-bottom: 0;
+}
+
+.bootbox .modal-body .form-horizontal {
+    margin: 10px 0;
+}
+
+.bootbox .modal-body .form-horizontal .control-group {
+    margin-bottom: 10px;
+}
+
+.bootbox .modal-body .form-horizontal .control-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.bootbox .modal-body .controls-slider {
+}
+
+.bootbox .modal-body .controls-slider .ui-slider {
+    width: 160px;
+    display: inline-block;
+    top: 5px;
+    margin: 0 10px;
+}
+
+.bootbox .modal-body .controls span.help-block {
+    color: #999;
+    margin-top: 5px;
+}
+
+.bootbox .modal-body .controls-slider span.help-block {
+    margin-top: 0;
+}
+
+.bootbox .modal-body #setupBuilds span {
+    position: relative;
+    top: 3px;
+}
+
+.bootbox .modal-body #setupBuilds .control-group {
+    margin-bottom: 0;
+}
+
+.bootbox .modal-body #setupBuilds .control-group .controls input[type="checkbox"] {
+    margin-top: 0px;
+    position: relative;
+    top: -2px;
+}
+
+.bootbox .modal-body #setupBuilds .control-group .controls {
+    margin-top: 5px;
+}
+
+.bootbox .modal-body .controls-slider span.uneditable-input {
+    width: 20px;
+    text-align: center;
+}
+
+.bootbox .modal-body .controls-slider input {
+    display: none;
 }
 
 .bootbox .modal-body,

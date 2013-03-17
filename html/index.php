@@ -19,9 +19,11 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <link href="libs/colorbox/css/colorbox.css" rel="stylesheet" media="screen">
+        <link href="libs/jquery-ui/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" media="screen">
         <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="libs/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <link href="libs/colorbox/css/colorbox.css" rel="stylesheet" media="screen">
+
         <link href='http://fonts.googleapis.com/css?family=Cuprum:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
         <link href="css/screen.css" rel="stylesheet" media="screen">
@@ -56,7 +58,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
                                 <ul class="nav pull-right">
                                     <li>
-                                        <a href="#" id="setupLink">Setup</a>
+                                        <a href="#" id="settingsLink">Settings</a>
                                     </li>
                                 </ul>
                             </div>
@@ -86,6 +88,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
         <script src="libs/jquery/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
+        <script src="libs/jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/bootbox/bootbox.min.js"></script>
         <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
@@ -158,5 +161,46 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 </div>
             </div>
         </script>
+
+        <script id="template-setup" type="text/x-handlebars-template">
+            <form id="setupForm" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="feedUrl">Feed URL</label>
+                    <div class="controls">
+                        <input type="text" id="feedUrl" name="feedUrl" placeholder="Feed Url" value="{{feedUrl}}" />
+                        <span class="help-block">Enter phpUnderControl build feed url.</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="buildsPerRow">Builds per row</label>
+                    <div class="controls controls-slider">
+                        <span class="uneditable-input">{{buildsPerRow}}</span>
+                        <div id="buildsPerRowSlider" class="slider" data-min="1" data-max="4"></div>
+                        <input type="text" id="buildsPerRow" name="buildsPerRow" placeholder="" value="{{buildsPerRow}}" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="refreshInterval">Refresh interval</label>
+                    <div class="controls controls-slider">
+                        <span class="uneditable-input">{{refreshInterval}}</span>
+                        <div id="refreshIntervalSlider" class="slider" data-min="1" data-max="30"></div>
+                        <input type="text" id="refreshInterval" name="refreshInterval" placeholder="" value="{{refreshInterval}}" />
+                        <span class="help-block">Refresh interval in minutes</span>
+                    </div>
+                </div>
+                <div id="setupBuilds">
+                    <div class="control-group">
+                        <label class="control-label">Select projects to shown</label>
+                        <div class="controls">
+                            <label><input type="checkbox" /> Build </label>
+                            <label><input type="checkbox" /> Check me out</label>
+                            <label><input type="checkbox" /> Check me out</label>
+                            <label><input type="checkbox" /> Check me out</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </script>
+
     </body>
 </html>

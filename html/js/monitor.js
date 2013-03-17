@@ -155,11 +155,45 @@ jQuery(document).ready(function() {
         clearInterval(interval);
     });
 
-    jQuery('#header').on('click', '#setupLink', function(event) {
-        jQuery.ajax({
-            data: {
-                service: 'Setup'
-            }
+    jQuery('#header').on('click', '#settingsLink', function(event) {
+        event.preventDefault();
+
+        var source = jQuery("#template-setup").html();
+        var template = Handlebars.compile(source);
+        var data = {};
+
+        var buttons = [{
+            "label" : "Close",
+            "class" : "btn"
+        }, {
+            "label" : "Save settings",
+            "class" : "btn-primary"
+        }];
+
+        var dialog = bootbox.dialog(template(data), buttons, {header: 'Build monitor settings'});
+
+        dialog.find('.controls-slider').each(function() {
+            var controls = jQuery(this);
+            var slider = controls.find('.slider');
+            var input = controls.find('input');
+            var span = controls.find('span.uneditable-input');
+
+            var valueCurrent = parseInt(input.val(), 10);
+            var valueMin = parseInt(slider.data('min'), 10);
+            var valueMax = parseInt(slider.data('max'), 10);
+
+            slider.slider({
+                range : 'min',
+                min   : valueMin,
+                max   : valueMax,
+                value : isNaN(valueCurrent) ? 1 : valueCurrent,
+                slide : function (event, ui) {
+                    var value = parseInt(ui.value, 10);
+
+                    input.val(value);
+                    span.html(value);
+                }
+            });
         });
     })
 });
