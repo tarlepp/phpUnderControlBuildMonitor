@@ -42,5 +42,12 @@ var phpUnderControl = {
         file: '',
         line: '',
         trace: ''
+    },
+    Settings: {
+        feedUrl: '',
+        buildsPerRow: '',
+        buildClass: '',
+        refreshInterval: '',
+        buildsToShow: []
     }
 };
