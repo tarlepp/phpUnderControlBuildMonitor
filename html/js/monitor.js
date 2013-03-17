@@ -116,6 +116,10 @@ jQuery(document).ready(function() {
                 var cntSuccess = 0;
 
                 jQuery.each(feed.items, function(index, /*phpUnderControl.Feed.item*/item) {
+                    if (jQuery.inArray(item.title.substring(0, item.title.search(" ")), settings.projectsToShow) == -1) {
+                        return;
+                    }
+
                     if ((String(item.description).search('passed') == -1)) {
                         wrapClass = 'wrapError';
 

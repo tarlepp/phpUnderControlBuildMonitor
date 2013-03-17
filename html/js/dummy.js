@@ -48,6 +48,6 @@ var phpUnderControl = {
         buildsPerRow: '',
         buildClass: '',
         refreshInterval: '',
-        buildsToShow: []
+        projectsToShow: []
     }
 };
