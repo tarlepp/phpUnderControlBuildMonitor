@@ -48,7 +48,7 @@ jQuery(document).ready(function() {
             bootbox.dialog(template(templateData), {
                 "label" : "Close",
                 "class" : "btn"
-            });
+            }, {header: 'Oh noes, error occurred'});
         }
     });
 
