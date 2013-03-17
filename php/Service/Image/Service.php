@@ -62,6 +62,13 @@ class Service extends Handler
 
             $count = count($images);
 
+            // No need for this type of images
+            if ($imageCount === 0) {
+                ${$imageArray} = array();
+
+                continue;
+            }
+
             // We don't have required amount of images
             while ($imageCount > count($images)) {
                 // Only one image, so do not make unnecessary random for images
@@ -72,8 +79,14 @@ class Service extends Handler
                 }
             }
 
+            $keys = array_rand($images, $imageCount);
+
+            if (!is_array($keys)) {
+                $keys = array($keys);
+            }
+
             // Get request count of random images from current images array
-            ${$imageArray} = array_values(array_intersect_key($images, array_flip(array_rand($images, $imageCount))));
+            ${$imageArray} = array_values(array_intersect_key($images, array_flip($keys)));
         }
 
         $data = array(
