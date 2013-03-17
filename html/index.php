@@ -132,12 +132,13 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         <script id="template-error-exception" type="text/x-handlebars-template">
             <div class="error-bootbox">
                 <div class="alert alert-error">
-                    <h2>Error</h2>
+                    <h2>Oh noes, error occurred</h2>
                     <p>
                         {{message}}
                     </p>
                     <h3>Information</h3>
-                    <pre class="pre-scrollable text-mini">{{file}}:{{line}}</pre>
+                    <pre class="pre-scrollable text-mini">File: {{file}}<br />Line: {{line}}</pre>
+                    <h3>Trace</h3>
                     <pre class="pre-scrollable text-mini">{{trace}}</pre>
                 </div>
             </div>
@@ -146,12 +147,13 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         <script id="template-error-common" type="text/x-handlebars-template">
             <div class="error-bootbox">
                 <div class="alert alert-error">
-                    <h2>Error</h2>
+                    <h2>Oh noes, error occurred</h2>
                     <p>
                         {{message}}
                     </p>
                     <h3>Information</h3>
                     <pre class="pre-scrollable text-mini">HTTP status {{status}}</pre>
+                    <h3>Response</h3>
                     <pre class="pre-scrollable text-mini">{{responseText}}</pre>
                 </div>
             </div>

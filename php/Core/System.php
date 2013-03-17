@@ -21,14 +21,6 @@ use phpUnderControlBuildMonitor\Util\UUID;
  */
 class System implements Interfaces\System
 {
-    /**
-     * Singleton class variable.
-     *
-     * @access  protected
-     * @var     \phpUnderControlBuildMonitor\Core\System
-     */
-    protected static $instance = null;
-
     /**#@+
      * Base site variables to use. These are not valid IF actual content
      * is empty.
@@ -39,6 +31,14 @@ class System implements Interfaces\System
     public static $basePath = '';
     public static $csrfToken = '';
     /**#@-*/
+
+    /**
+     * Singleton class variable.
+     *
+     * @access  protected
+     * @var     \phpUnderControlBuildMonitor\Core\System
+     */
+    protected static $instance = null;
 
     /**
      * Current request object.
@@ -53,6 +53,10 @@ class System implements Interfaces\System
      * @var     array
      */
     private $components = array(
+        'errors'        => array(
+            'property'  => false,
+            'method'    => 'initErrorHandling'
+        ),
         'session'       => array(
             'property'  => false,
             'method'    => 'initSession'
@@ -94,6 +98,8 @@ class System implements Interfaces\System
 
     /**
      * Method initializes all phpUnderControlBuildMonitor specified components.
+     *
+     * @return  void
      */
     protected function initializeComponents()
     {
@@ -205,6 +211,33 @@ class System implements Interfaces\System
         }
 
         return $method;
+    }
+
+    /**
+     * Method initializes generic PHP errors convert to exceptions.
+     *
+     * @throws  ErrorException
+     *
+     * @return  void
+     */
+    protected function initErrorHandling()
+    {
+        /**
+         * Generic PHP error handler to use to convert default errors to
+         * exceptions. This is needed for more generic error handling.
+         *
+         * @throws  ErrorException
+         *
+         * @param   $code       integer Error code
+         * @param   $message    string  Error message
+         * @param   $filename   string   Filename where error occurred
+         * @param   $lineNumber integer Line number where error occurred
+         */
+        $errorHandling = function ($code, $message, $filename, $lineNumber) {
+            throw new ErrorException($message, $code, 0, $filename, $lineNumber);
+        };
+
+        set_error_handler($errorHandling);
     }
 
     /**

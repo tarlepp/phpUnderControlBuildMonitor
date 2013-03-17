@@ -278,17 +278,20 @@ body {
     font-size: 12px;
 }
 
+.bootbox .modal-body h2,
+.bootbox .modal-body h3 {
+    border-bottom: 1px solid;
+}
+
 .bootbox .modal-body h2 {
     margin-top: 0;
     font-size: 22px;
     line-height: 22px;
-    border-bottom: 1px solid;
 }
 
 .bootbox .modal-body h3 {
     font-size: 18px;
     line-height: 18px;
-    border-bottom: 1px solid;
 }
 
 .bootbox .modal-body p {

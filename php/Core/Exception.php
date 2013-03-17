@@ -13,7 +13,7 @@ use phpUnderControlBuildMonitor\Util\JSON;
 /**
  * Exception -class
  *
- * Generic exception class for HomeAI -software. All Exception classes
+ * Generic exception class for phpUnderControlBuildMonitor -software. All Exception classes
  * must extend this class.
  *
  * @package     phpUnderControlBuildMonitor
