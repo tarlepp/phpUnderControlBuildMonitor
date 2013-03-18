@@ -92,7 +92,7 @@ jQuery(document).ready(function() {
                                     }
                                 });
                             },
-                            success: function(settings) {
+                            success: function(/*phpUnderControl.Settings*/settings) {
                                 makeProjects(settings);
 
                                 dialog.modal('hide');
@@ -116,8 +116,6 @@ jQuery(document).ready(function() {
 
                                 if (data.element != 'generic') {
                                     var row = element.parent();
-
-                                    console.log(row.hasClass('input-append'));
 
                                     if (row.hasClass('input-append')) {
                                         row = row.parent().parent();
@@ -259,8 +257,6 @@ jQuery(document).ready(function() {
                 var content = '';
 
                 jQuery.each(builds.chunk(options.perRow), function(index, item) {
-                    //container.append(template({builds: item}));
-
                     content += template({builds: item});
                 });
 
