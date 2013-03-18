@@ -194,7 +194,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 </div>
                 <div id="setupBuilds">
                     <div class="control-group">
-                        <label class="control-label">Select projects to shown</label>
+                        <label class="control-label">Select projects to show</label>
                         <div class="controls">
                             <div id="projectsToShow" class="popover-container" data-placement="top" style="width: 12px;"></div>
                             <div id="projects">
