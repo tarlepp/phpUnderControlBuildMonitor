@@ -7,6 +7,10 @@ body {
     cursor: default;
 }
 
+input, button, select, textarea {
+    font-family: 'Cuprum', sans-serif;
+}
+
 #wrap {
     min-height: 100%;
     height: auto !important;
