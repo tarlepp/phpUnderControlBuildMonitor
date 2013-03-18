@@ -30,7 +30,7 @@ class Service extends Handler
      */
     protected $settings = array(
         'feedUrl'           => 'feed.xml',
-        'buildsPerRow'      => 3,
+        'buildsPerRow'      => 4,
         'buildClass'        => 'span4',
         'refreshInterval'   => 10,
         'projectsToShow'    => array(),
@@ -320,7 +320,6 @@ class Service extends Handler
         return $projects;
     }
 
-
     /**
      * Main service request initializer. If settings are not yet stored
      * to session method will store default setting data to session.
@@ -338,9 +337,9 @@ class Service extends Handler
         // Settings are not yet set, so make default settings
         if (empty($settings)) {
             $settings = array(
-                'feedUrl'           => $this->baseHref . 'feed.xml',
-                'buildsPerRow'      => 3,
-                'refreshInterval'   => 10,
+                'feedUrl'           => $this->baseHref . $this->settings['feedUrl'],
+                'buildsPerRow'      => $this->settings['buildsPerRow'],
+                'refreshInterval'   => $this->settings['refreshInterval'],
                 'projectsToShow'    => $this->getProjects($this->baseHref . 'feed.xml'),
             );
         }

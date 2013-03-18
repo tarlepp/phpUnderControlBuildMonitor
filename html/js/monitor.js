@@ -303,7 +303,7 @@ jQuery(document).ready(function() {
                     }
                 });
 
-                jQuery('#wrap').removeClass().addClass(wrapClass);
+                jQuery('#wrap').removeClass().addClass(wrapClass).addClass(settings.buildClass.replace("span","wrap"));
             }
         });
     }
