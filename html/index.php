@@ -102,7 +102,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
             <div class="build {{class}} {{getStatusClass description}}">
                 <div class="title navbar">
                     <ul class="nav pull-right">
-                        <li><a href="{{link}}" target="_blank"><i class="icon-search icon-white"></i></a></li>
+                        <li><a href="{{link}}" target="_blank" title="Open project into new tab"><i class="icon-search icon-white"></i></a></li>
                     </ul>
                     <h2>{{formatTitle title}}</h2>
                 </div>
