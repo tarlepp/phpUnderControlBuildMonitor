@@ -70,8 +70,6 @@ jQuery(document).ready(function() {
                     callback: function() {
                         var form = dialog.find('form');
 
-                        console.log(form.serializeJSON());
-
                         jQuery.ajax({
                             data: jQuery.extend(
                                 {},
@@ -99,7 +97,7 @@ jQuery(document).ready(function() {
 
                                 dialog.modal('hide');
                             },
-                            error: function(jqXHR, exception) {
+                            error: function(jqXHR) {
                                 var data = JSON.parse(jqXHR.responseText);
                                 var message = data.message;
 
@@ -113,12 +111,21 @@ jQuery(document).ready(function() {
                                 };
 
                                 popoverElement.popover(options);
-
                                 popoverElement.data('popover').options.content = message;
                                 popoverElement.popover('show');
 
                                 if (data.element != 'generic') {
-                                    element.parent().parent().addClass('error');
+                                    var row = element.parent();
+
+                                    console.log(row.hasClass('input-append'));
+
+                                    if (row.hasClass('input-append')) {
+                                        row = row.parent().parent();
+                                    } else {
+                                        row = row.parent();
+                                    }
+
+                                    row.addClass('error');
                                 }
 
                                 dialog.find('.modal-body').scrollTop(0);
@@ -154,6 +161,54 @@ jQuery(document).ready(function() {
                         }
                     });
                 });
+
+                dialog.on('click', '#fetchProjects', function() {
+                    var form = dialog.find('form');
+
+                    jQuery.ajax({
+                        data: {
+                            service: 'Setting',
+                            action: 'GetFeedProjects',
+                            url: form.find('#feedUrl').val()
+                        },
+                        beforeSend: function() {
+                            form.find('.control-group').removeClass('error');
+                            form.find('.popover-container').each(function() {
+                                var element = jQuery(this).parent().find('.popover');
+
+                                if (element.length > 0) {
+                                    element.remove();
+                                }
+                            });
+                        },
+                        success: function(data) {
+                            var source = jQuery("#template-setup-projects").html();
+                            var template = Handlebars.compile(source);
+
+                            form.find('#projects').html(template(data));
+                        },
+                        error: function(jqXHR) {
+                            var data = JSON.parse(jqXHR.responseText);
+                            var message = data.message;
+
+                            var element = form.find('#feedUrl');
+                            var popoverElement = element.parent().find('.popover-container');
+
+                            var options = {
+                                content: '',
+                                trigger: 'manual',
+                                html: true
+                            };
+
+                            popoverElement.popover(options);
+                            popoverElement.data('popover').options.content = message;
+                            popoverElement.popover('show');
+
+                            element.parent().parent().parent().addClass('error');
+                            dialog.find('.modal-body').scrollTop(0);
+                        }
+                    });
+                })
             }
         });
     });

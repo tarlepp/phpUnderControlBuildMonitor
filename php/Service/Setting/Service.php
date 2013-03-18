@@ -81,6 +81,7 @@ class Service extends Handler
         // Set cURL options
         curl_setopt($ch, \CURLOPT_URL, empty($feedUrl) ? $this->settings['feedUrl'] : $feedUrl);
         curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, \CURLOPT_CONNECTTIMEOUT, 5);
 
         // Get HTTP status code and actual response from server
         $content = curl_exec($ch);
@@ -88,8 +89,6 @@ class Service extends Handler
 
         // cURL error occurred
         if ($content === false) {
-            header("HTTP/1.0 400 Bad Request");
-
             throw new Exception('cURL error: ' . curl_error($ch));
         }
 
@@ -110,7 +109,6 @@ class Service extends Handler
 
         header('Content-type: application/xml');
         echo $content;
-
         exit(0);
     }
 
@@ -192,6 +190,41 @@ class Service extends Handler
 
             return array(
                 'element'   => $field,
+                'message'   => $error->getMessage(),
+            );
+        }
+    }
+
+    /**
+     * Method fetches specified feed projects and returns them as an array.
+     *
+     * @return  array
+     */
+    public function handleRequestGetFeedProjects()
+    {
+        // Specify current feed url
+        $feedUrl = (string)$this->request->get('url', '');
+
+        try {
+            // Validate feed url and store its projects into cache
+            $this->validateFeedUrl($feedUrl);
+
+            // Initialize output projects
+            $projects = array();
+
+            // Iterate projects from specified feed url
+            foreach ($this->projectCache as $project) {
+                $projects[] = array(
+                    'name'      => $project,
+                    'checked'   => in_array($project, $this->settings['projectsToShow']),
+                );
+            }
+
+            return array('projects' => $projects);
+        } catch (Exception $error) {
+            header("HTTP/1.0 400 Bad Request");
+
+            return array(
                 'message'   => $error->getMessage(),
             );
         }

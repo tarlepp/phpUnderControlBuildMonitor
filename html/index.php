@@ -168,7 +168,10 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                     <label class="control-label" for="feedUrl">Feed URL</label>
                     <div class="controls">
                         <div id="generic" class="popover-container" style="width: 200px;" data-placement="bottom"></div>
-                        <input type="text" id="feedUrl" name="feedUrl" class="popover-container" data-placement="bottom" value="{{feedUrl}}" />
+                        <div class="input-append">
+                            <input type="text" id="feedUrl" name="feedUrl" class="popover-container" data-placement="bottom" value="{{feedUrl}}" />
+                            <button id="fetchProjects" class="btn" type="button">Fetch projects</button>
+                        </div>
                         <span class="help-block">Enter phpUnderControl build feed url.</span>
                     </div>
                 </div>
@@ -194,16 +197,27 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                         <label class="control-label">Select projects to shown</label>
                         <div class="controls">
                             <div id="projectsToShow" class="popover-container" data-placement="top" style="width: 12px;"></div>
+                            <div id="projects">
                             {{#each projects}}
                                 <label>
                                     <input type="checkbox" name="projectsToShow[]" value="{{this.name}}"{{#if this.checked}} checked="checked"{{/if}} />
                                     {{this.name}}
                                 </label>
                             {{/each}}
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
+        </script>
+
+        <script id="template-setup-projects" type="text/x-handlebars-template">
+            {{#each projects}}
+            <label>
+                <input type="checkbox" name="projectsToShow[]" value="{{this.name}}"{{#if this.checked}} checked="checked"{{/if}} />
+                {{this.name}}
+            </label>
+            {{/each}}
         </script>
 
     </body>
