@@ -54,40 +54,107 @@ jQuery(document).ready(function() {
 
         var source = jQuery("#template-setup").html();
         var template = Handlebars.compile(source);
-        var data = {};
 
-        var buttons = [{
-            "label" : "Close",
-            "class" : "btn"
-        }, {
-            "label" : "Save settings",
-            "class" : "btn-primary"
-        }];
+        jQuery.ajax({
+            data: {
+                service: 'Setting',
+                action: 'SettingsDialog'
+            },
+            success: function(/*phpUnderControl.Settings*/settings) {
+                var buttons = [{
+                    label: 'Close',
+                    class: 'btn'
+                }, {
+                    label: 'Save settings',
+                    class: 'btn-primary',
+                    callback: function() {
+                        var form = dialog.find('form');
 
-        var dialog = bootbox.dialog(template(data), buttons, {header: 'Build monitor settings'});
+                        console.log(form.serializeJSON());
 
-        dialog.find('.controls-slider').each(function() {
-            var controls = jQuery(this);
-            var slider = controls.find('.slider');
-            var input = controls.find('input');
-            var span = controls.find('span.uneditable-input');
+                        jQuery.ajax({
+                            data: jQuery.extend(
+                                {},
+                                {
+                                    service: 'Setting',
+                                    action: 'SaveSettings'
+                                },
+                                {
+                                    data: form.serializeJSON()
+                                }
+                            ),
+                            beforeSend: function() {
+                                form.find('.control-group').removeClass('error');
 
-            var valueCurrent = parseInt(input.val(), 10);
-            var valueMin = parseInt(slider.data('min'), 10);
-            var valueMax = parseInt(slider.data('max'), 10);
+                                form.find('.popover-container').each(function() {
+                                    var element = jQuery(this).parent().find('.popover');
 
-            slider.slider({
-                range : 'min',
-                min   : valueMin,
-                max   : valueMax,
-                value : isNaN(valueCurrent) ? 1 : valueCurrent,
-                slide : function (event, ui) {
-                    var value = parseInt(ui.value, 10);
+                                    if (element.length > 0) {
+                                        element.remove();
+                                    }
+                                });
+                            },
+                            success: function(settings) {
+                                makeProjects(settings);
 
-                    input.val(value);
-                    span.html(value);
-                }
-            });
+                                dialog.modal('hide');
+                            },
+                            error: function(jqXHR, exception) {
+                                var data = JSON.parse(jqXHR.responseText);
+                                var message = data.message;
+
+                                var element = form.find('#' + data.element);
+                                var popoverElement = element.parent().find('.popover-container');
+
+                                var options = {
+                                    content: '',
+                                    trigger: 'manual',
+                                    html: true
+                                };
+
+                                popoverElement.popover(options);
+
+                                popoverElement.data('popover').options.content = message;
+                                popoverElement.popover('show');
+
+                                if (data.element != 'generic') {
+                                    element.parent().parent().addClass('error');
+                                }
+
+                                dialog.find('.modal-body').scrollTop(0);
+                            }
+                        });
+
+                        return false;
+                    }
+                }];
+
+                var dialog = bootbox.dialog(template(settings), buttons, {header: 'Build monitor settings'});
+
+                dialog.find('.controls-slider').each(function() {
+                    var controls = jQuery(this);
+                    var slider = controls.find('.slider');
+                    var input = controls.find('input');
+                    var span = controls.find('span.uneditable-input');
+
+                    var valueCurrent = parseInt(input.val(), 10);
+                    var valueMin = parseInt(slider.data('min'), 10);
+                    var valueMax = parseInt(slider.data('max'), 10);
+
+                    slider.slider({
+                        range : 'min',
+                        min   : valueMin,
+                        max   : valueMax,
+                        value : isNaN(valueCurrent) ? 1 : valueCurrent,
+                        slide : function (event, ui) {
+                            var value = parseInt(ui.value, 10);
+
+                            input.val(value);
+                            span.html(value);
+                        }
+                    });
+                });
+            }
         });
     });
 
@@ -134,9 +201,15 @@ jQuery(document).ready(function() {
                 source = jQuery("#template-build-row").html();
                 template = Handlebars.compile(source);
 
+                var content = '';
+
                 jQuery.each(builds.chunk(options.perRow), function(index, item) {
-                    container.append(template({builds: item}));
+                    //container.append(template({builds: item}));
+
+                    content += template({builds: item});
                 });
+
+                container.html(content);
 
                 container.find('.content h2 time.timeago').timeago();
 
@@ -179,6 +252,39 @@ jQuery(document).ready(function() {
             }
         });
     }
+
+    jQuery.fn.serializeJSON=function() {
+        var json = {};
+        jQuery.map(jQuery(this).serializeArray(), function(n, i) {
+            var _ = n.name.indexOf('[');
+            if (_ > -1) {
+                var o = json;
+                _name = n.name.replace(/\]/gi, '').split('[');
+                for (var i=0, len=_name.length; i<len; i++) {
+                    if (i == len-1) {
+                        if (o[_name[i]]) {
+                            if (typeof o[_name[i]] == 'string') {
+                                o[_name[i]] = [o[_name[i]]];
+                            }
+                            o[_name[i]].push(n.value);
+                        }
+                        else o[_name[i]] = n.value || '';
+                    }
+                    else o = o[_name[i]] = o[_name[i]] || {};
+                }
+            }
+            else {
+                if (json[n.name] !== undefined) {
+                    if (!json[n.name].push) {
+                        json[n.name] = [json[n.name]];
+                    }
+                    json[n.name].push(n.value || '');
+                }
+                else json[n.name] = n.value || '';
+            }
+        });
+        return json;
+    };
 });
 
 function isJsonString(string) {

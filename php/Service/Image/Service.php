@@ -8,6 +8,7 @@
  */
 namespace phpUnderControlBuildMonitor\Service\Image;
 
+use phpUnderControlBuildMonitor\Service\Exception;
 use phpUnderControlBuildMonitor\Service\Handler;
 
 /**

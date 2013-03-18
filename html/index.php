@@ -167,7 +167,8 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 <div class="control-group">
                     <label class="control-label" for="feedUrl">Feed URL</label>
                     <div class="controls">
-                        <input type="text" id="feedUrl" name="feedUrl" placeholder="Feed Url" value="{{feedUrl}}" />
+                        <div id="generic" class="popover-container" style="width: 200px;" data-placement="bottom"></div>
+                        <input type="text" id="feedUrl" name="feedUrl" class="popover-container" data-placement="bottom" value="{{feedUrl}}" />
                         <span class="help-block">Enter phpUnderControl build feed url.</span>
                     </div>
                 </div>
@@ -175,7 +176,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                     <label class="control-label" for="buildsPerRow">Builds per row</label>
                     <div class="controls controls-slider">
                         <span class="uneditable-input">{{buildsPerRow}}</span>
-                        <div id="buildsPerRowSlider" class="slider" data-min="1" data-max="4"></div>
+                        <div id="buildsPerRowSlider" class="slider popover-container" data-placement="bottom" data-min="1" data-max="4"></div>
                         <input type="text" id="buildsPerRow" name="buildsPerRow" placeholder="" value="{{buildsPerRow}}" />
                     </div>
                 </div>
@@ -183,7 +184,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                     <label class="control-label" for="refreshInterval">Refresh interval</label>
                     <div class="controls controls-slider">
                         <span class="uneditable-input">{{refreshInterval}}</span>
-                        <div id="refreshIntervalSlider" class="slider" data-min="1" data-max="30"></div>
+                        <div id="refreshIntervalSlider" class="slider popover-container" data-placement="bottom" data-min="1" data-max="30"></div>
                         <input type="text" id="refreshInterval" name="refreshInterval" placeholder="" value="{{refreshInterval}}" />
                         <span class="help-block">Refresh interval in minutes</span>
                     </div>
@@ -192,10 +193,13 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                     <div class="control-group">
                         <label class="control-label">Select projects to shown</label>
                         <div class="controls">
-                            <label><input type="checkbox" /> Build </label>
-                            <label><input type="checkbox" /> Check me out</label>
-                            <label><input type="checkbox" /> Check me out</label>
-                            <label><input type="checkbox" /> Check me out</label>
+                            <div id="projectsToShow" class="popover-container" data-placement="top" style="width: 12px;"></div>
+                            {{#each projects}}
+                                <label>
+                                    <input type="checkbox" name="projectsToShow[]" value="{{this.name}}"{{#if this.checked}} checked="checked"{{/if}} />
+                                    {{this.name}}
+                                </label>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
