@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
     // Common AJAX setup
     jQuery.ajaxSetup({
         url: baseHref + 'service.php',
@@ -7,18 +7,18 @@ jQuery(document).ready(function() {
         },
         dataType: "json",
         type: "post",
-        error: function(jqXHR, exception) {
+        error: function (jqXHR, exception) {
             handleError(jqXHR, exception);
         }
     });
 
     var container = jQuery('#container');
 
-    Handlebars.registerHelper('getStatusClass', function(description) {
+    Handlebars.registerHelper('getStatusClass', function (description) {
         return (String(description).search('passed') == -1) ? 'alert-error' : 'alert-success';
     });
 
-    Handlebars.registerHelper('formatTitle', function(title) {
+    Handlebars.registerHelper('formatTitle', function (title) {
         title = String(title);
 
         return title.substring(0, title.search(" "));
@@ -28,28 +28,28 @@ jQuery(document).ready(function() {
         data: {
             service: 'Setting'
         },
-        success: function(/*phpUnderControl.Settings*/settings) {
+        success: function (/*phpUnderControl.Settings*/settings) {
             makeProjects(settings);
         }
     });
 
     var interval = 0;
 
-    container.on('mouseover', '.content .colorbox', function() {
+    container.on('mouseover', '.content .colorbox', function () {
         var id = jQuery(this).prop('id');
 
-        interval = setInterval(function() {
-            jQuery('#' + id).colorbox({open:true});
+        interval = setInterval(function () {
+            jQuery('#' + id).colorbox({open: true});
 
             clearInterval(interval);
         }, 750);
     });
 
-    container.on('mouseout', '.content .colorbox', function() {
+    container.on('mouseout', '.content .colorbox', function () {
         clearInterval(interval);
     });
 
-    jQuery('#header').on('click', '#settingsLink', function(event) {
+    jQuery('#header').on('click', '#settingsLink', function (event) {
         event.preventDefault();
 
         var source = jQuery("#template-setup").html();
@@ -60,83 +60,81 @@ jQuery(document).ready(function() {
                 service: 'Setting',
                 action: 'SettingsDialog'
             },
-            success: function(/*phpUnderControl.Settings*/settings) {
-                var buttons = [{
-                    label: 'Close',
-                    class: 'btn'
-                }, {
-                    label: 'Save settings',
-                    class: 'btn-primary',
-                    callback: function() {
-                        var form = dialog.find('form');
+            success: function (/*phpUnderControl.Settings*/settings) {
+                var buttons = [
+                    {
+                        label: 'Close',
+                        class: 'btn'
+                    },
+                    {
+                        label: 'Save settings',
+                        class: 'btn-primary',
+                        callback: function () {
+                            var form = dialog.find('form');
 
-                        jQuery.ajax({
-                            data: jQuery.extend(
-                                {},
-                                {
+                            jQuery.ajax({
+                                data: {
                                     service: 'Setting',
-                                    action: 'SaveSettings'
-                                },
-                                {
+                                    action: 'SaveSettings',
                                     data: form.serializeJSON()
-                                }
-                            ),
-                            beforeSend: function() {
-                                form.find('.control-group').removeClass('error');
+                                },
+                                beforeSend: function () {
+                                    form.find('.control-group').removeClass('error');
 
-                                form.find('.popover-container').each(function() {
-                                    var element = jQuery(this).parent().find('.popover');
+                                    form.find('.popover-container').each(function () {
+                                        var element = jQuery(this).parent().find('.popover');
 
-                                    if (element.length > 0) {
-                                        element.remove();
+                                        if (element.length > 0) {
+                                            element.remove();
+                                        }
+                                    });
+                                },
+                                success: function (/*phpUnderControl.Settings*/settings) {
+                                    makeProjects(settings);
+
+                                    dialog.modal('hide');
+                                },
+                                error: function (jqXHR) {
+                                    var data = JSON.parse(jqXHR.responseText);
+                                    var message = data.message;
+
+                                    var element = form.find('#' + data.element);
+                                    var popoverElement = element.parent().find('.popover-container');
+
+                                    var options = {
+                                        content: '',
+                                        trigger: 'manual',
+                                        html: true
+                                    };
+
+                                    popoverElement.popover(options);
+                                    popoverElement.data('popover').options.content = message;
+                                    popoverElement.popover('show');
+
+                                    if (data.element != 'generic') {
+                                        var row = element.parent();
+
+                                        if (row.hasClass('input-append')) {
+                                            row = row.parent().parent();
+                                        } else {
+                                            row = row.parent();
+                                        }
+
+                                        row.addClass('error');
                                     }
-                                });
-                            },
-                            success: function(/*phpUnderControl.Settings*/settings) {
-                                makeProjects(settings);
 
-                                dialog.modal('hide');
-                            },
-                            error: function(jqXHR) {
-                                var data = JSON.parse(jqXHR.responseText);
-                                var message = data.message;
-
-                                var element = form.find('#' + data.element);
-                                var popoverElement = element.parent().find('.popover-container');
-
-                                var options = {
-                                    content: '',
-                                    trigger: 'manual',
-                                    html: true
-                                };
-
-                                popoverElement.popover(options);
-                                popoverElement.data('popover').options.content = message;
-                                popoverElement.popover('show');
-
-                                if (data.element != 'generic') {
-                                    var row = element.parent();
-
-                                    if (row.hasClass('input-append')) {
-                                        row = row.parent().parent();
-                                    } else {
-                                        row = row.parent();
-                                    }
-
-                                    row.addClass('error');
+                                    dialog.find('.modal-body').scrollTop(0);
                                 }
+                            });
 
-                                dialog.find('.modal-body').scrollTop(0);
-                            }
-                        });
-
-                        return false;
+                            return false;
+                        }
                     }
-                }];
+                ];
 
                 var dialog = bootbox.dialog(template(settings), buttons, {header: 'Build monitor settings'});
 
-                dialog.find('.controls-slider').each(function() {
+                dialog.find('.controls-slider').each(function () {
                     var controls = jQuery(this);
                     var slider = controls.find('.slider');
                     var input = controls.find('input');
@@ -147,11 +145,11 @@ jQuery(document).ready(function() {
                     var valueMax = parseInt(slider.data('max'), 10);
 
                     slider.slider({
-                        range : 'min',
-                        min   : valueMin,
-                        max   : valueMax,
-                        value : isNaN(valueCurrent) ? 1 : valueCurrent,
-                        slide : function (event, ui) {
+                        range: 'min',
+                        min: valueMin,
+                        max: valueMax,
+                        value: isNaN(valueCurrent) ? 1 : valueCurrent,
+                        slide: function (event, ui) {
                             var value = parseInt(ui.value, 10);
 
                             input.val(value);
@@ -160,7 +158,7 @@ jQuery(document).ready(function() {
                     });
                 });
 
-                dialog.on('click', '#fetchProjects', function() {
+                dialog.on('click', '#fetchProjects', function () {
                     var form = dialog.find('form');
 
                     jQuery.ajax({
@@ -169,9 +167,9 @@ jQuery(document).ready(function() {
                             action: 'GetFeedProjects',
                             url: form.find('#feedUrl').val()
                         },
-                        beforeSend: function() {
+                        beforeSend: function () {
                             form.find('.control-group').removeClass('error');
-                            form.find('.popover-container').each(function() {
+                            form.find('.popover-container').each(function () {
                                 var element = jQuery(this).parent().find('.popover');
 
                                 if (element.length > 0) {
@@ -179,13 +177,13 @@ jQuery(document).ready(function() {
                                 }
                             });
                         },
-                        success: function(data) {
+                        success: function (data) {
                             var source = jQuery("#template-setup-projects").html();
                             var template = Handlebars.compile(source);
 
                             form.find('#projects').html(template(data));
                         },
-                        error: function(jqXHR) {
+                        error: function (jqXHR) {
                             var data = JSON.parse(jqXHR.responseText);
                             var message = data.message;
 
@@ -219,10 +217,10 @@ jQuery(document).ready(function() {
                 action: 'GetFeed',
                 feed: settings.feedUrl
             },
-            error: function(jqXHR, exception) {
+            error: function (jqXHR, exception) {
                 handleError(jqXHR, exception);
             },
-            success: function(/*phpUnderControl.Feed*/feed) {
+            success: function (/*phpUnderControl.Feed*/feed) {
                 var wrapClass = 'wrapSuccess';
                 var source = jQuery("#template-build").html();
                 var template = Handlebars.compile(source);
@@ -235,7 +233,7 @@ jQuery(document).ready(function() {
                 var cntFails = 0;
                 var cntSuccess = 0;
 
-                jQuery.each(feed.items, function(index, /*phpUnderControl.Feed.item*/item) {
+                jQuery.each(feed.items, function (index, /*phpUnderControl.Feed.item*/item) {
                     if (jQuery.inArray(item.title.substring(0, item.title.search(" ")), settings.projectsToShow) == -1) {
                         return;
                     }
@@ -256,7 +254,7 @@ jQuery(document).ready(function() {
 
                 var content = '';
 
-                jQuery.each(builds.chunk(options.perRow), function(index, item) {
+                jQuery.each(builds.chunk(options.perRow), function (index, item) {
                     content += template({builds: item});
                 });
 
@@ -270,8 +268,8 @@ jQuery(document).ready(function() {
                         cntFails: cntFails,
                         cntSuccess: cntSuccess
                     },
-                    success: function(/*phpUnderControl.Images*/data) {
-                        container.find('.build.alert-error').each(function(index) {
+                    success: function (/*phpUnderControl.Images*/data) {
+                        container.find('.build.alert-error').each(function (index) {
                             var image = data.fails[index] ? data.fails[index] : false;
                             var element = jQuery(this);
                             var imgElement = element.find('img');
@@ -283,7 +281,7 @@ jQuery(document).ready(function() {
                             }
                         });
 
-                        container.find('.build.alert-success').each(function(index) {
+                        container.find('.build.alert-success').each(function (index) {
                             var image = data.success[index] ? data.success[index] : false;
                             var element = jQuery(this);
                             var imgElement = element.find('img');
@@ -299,20 +297,20 @@ jQuery(document).ready(function() {
                     }
                 });
 
-                jQuery('#wrap').removeClass().addClass(wrapClass).addClass(settings.buildClass.replace("span","wrap"));
+                jQuery('#wrap').removeClass().addClass(wrapClass).addClass(settings.buildClass.replace("span", "wrap"));
             }
         });
     }
 
-    jQuery.fn.serializeJSON=function() {
+    jQuery.fn.serializeJSON = function () {
         var json = {};
-        jQuery.map(jQuery(this).serializeArray(), function(n, i) {
+        jQuery.map(jQuery(this).serializeArray(), function (n, i) {
             var _ = n.name.indexOf('[');
             if (_ > -1) {
                 var o = json;
                 _name = n.name.replace(/\]/gi, '').split('[');
-                for (var i=0, len=_name.length; i<len; i++) {
-                    if (i == len-1) {
+                for (var i = 0, len = _name.length; i < len; i++) {
+                    if (i == len - 1) {
                         if (o[_name[i]]) {
                             if (typeof o[_name[i]] == 'string') {
                                 o[_name[i]] = [o[_name[i]]];
@@ -387,14 +385,14 @@ function handleError(jqXHR, exception) {
     var template = Handlebars.compile(source);
 
     bootbox.dialog(template(templateData), {
-        "label" : "Close",
-        "class" : "btn"
+        "label": "Close",
+        "class": "btn"
     }, {header: 'Oh noes, error occurred'});
 }
 
-Array.prototype.chunk = function ( n ) {
-    if ( !this.length ) {
+Array.prototype.chunk = function (n) {
+    if (!this.length) {
         return [];
     }
-    return [ this.slice( 0, n ) ].concat( this.slice(n).chunk(n) );
+    return [ this.slice(0, n) ].concat(this.slice(n).chunk(n));
 };
