@@ -339,14 +339,15 @@ a:focus {
     margin-bottom: 0;
 }
 
-.bootbox .modal-body .controls-slider {
-}
-
 .bootbox .modal-body .controls-slider .ui-slider {
     width: 160px;
     display: inline-block;
     top: 5px;
     margin: 0 10px;
+}
+
+.bootbox .modal-body .controls-slider .ui-slider .ui-slider-handle {
+    cursor: pointer;
 }
 
 .bootbox .modal-body .controls span.help-block {
