@@ -21,15 +21,14 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
         <meta name="author" content="Tarmo Leppänen">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="phpUnderControl Build Monitor see https://github.com/tarlepp/phpUnderControlBuildMonitor"/>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
+        <link href='http://fonts.googleapis.com/css?family=Cuprum:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href="libs/colorbox/css/colorbox.css" rel="stylesheet" media="screen">
         <link href="libs/jquery-ui/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" media="screen">
         <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="libs/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-
-        <link href='http://fonts.googleapis.com/css?family=Cuprum:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-
         <link href="css/screen.css" rel="stylesheet" media="screen">
         <link href="css/responsive.css" rel="stylesheet" media="screen">
 
