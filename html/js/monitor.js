@@ -62,7 +62,9 @@ jQuery(document).ready(function () {
         });
     });
 
-    header.on('click', '#refreshLink', function() {
+    header.on('click', '#refreshLink', function(event) {
+        event.preventDefault();
+
         jQuery.ajax({
             data: {
                 service: 'Setting'
