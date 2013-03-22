@@ -4,6 +4,7 @@
     color: #FFFFFF;
     line-height: 40px;
     right: 5px;
+    display: none;
 }
 
 .responsiveWidth:before {
