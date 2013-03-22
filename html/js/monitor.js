@@ -61,7 +61,18 @@ jQuery(document).ready(function () {
         });
     });
 
-    jQuery('#header').on('click', '#settingsLink', function (event) {
+    jQuery('#header').on('click', '#refreshLink', function() {
+        jQuery.ajax({
+            data: {
+                service: 'Setting'
+            },
+            success: function (/*phpUnderControl.Settings*/settings) {
+                makeProjects(settings);
+            }
+        });
+    });
+
+    jQuery('#header').on('click', '#settingsLink', function(event) {
         event.preventDefault();
 
         var source = jQuery("#template-setup").html();
@@ -283,8 +294,7 @@ jQuery(document).ready(function () {
                     content += template({builds: item});
                 });
 
-                container.html(content);
-                container.find('.content h2 time.timeago').timeago();
+                content = jQuery(content);
 
                 jQuery.ajax({
                     data: {
@@ -293,7 +303,7 @@ jQuery(document).ready(function () {
                         cntSuccess: cntSuccess
                     },
                     success: function (/*phpUnderControl.Images*/data) {
-                        container.find('.build.alert-error').each(function (index) {
+                        content.find('.build.alert-error').each(function (index) {
                             var image = data.fails[index] ? data.fails[index] : false;
                             var element = jQuery(this);
                             var imgElement = element.find('img');
@@ -305,7 +315,7 @@ jQuery(document).ready(function () {
                             }
                         });
 
-                        container.find('.build.alert-success').each(function (index) {
+                        content.find('.build.alert-success').each(function (index) {
                             var image = data.success[index] ? data.success[index] : false;
                             var element = jQuery(this);
                             var imgElement = element.find('img');
@@ -317,6 +327,8 @@ jQuery(document).ready(function () {
                             }
                         });
 
+                        container.html(content);
+                        container.find('.content h2 time.timeago').timeago();
                         container.find('.content .colorbox').colorbox({opacity: 0.8, maxHeight: '90%'});
                     }
                 });
@@ -329,6 +341,8 @@ jQuery(document).ready(function () {
 
                     clearInterval(timeOuts['projects']);
                 }, settings.refreshInterval * 60 * 1000);
+
+                i++;
             }
         });
     }

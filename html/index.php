@@ -57,9 +57,13 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
                             <div id="mainNavigation" class="nav-collapse collapse">
                                 <ul class="nav">
+
                                 </ul>
 
                                 <ul class="nav pull-right">
+                                    <li>
+                                        <a href="#" id="refreshLink">Refresh</a>
+                                    </li>
                                     <li>
                                         <a href="#" id="settingsLink">Settings</a>
                                     </li>
