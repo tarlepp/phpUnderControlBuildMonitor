@@ -13,6 +13,7 @@ jQuery(document).ready(function () {
     });
 
     var container = jQuery('#container');
+    var timeOuts = [];
 
     Handlebars.registerHelper('getStatusClass', function (description) {
         return (String(description).search('passed') == -1) ? 'alert-error' : 'alert-success';
@@ -33,20 +34,18 @@ jQuery(document).ready(function () {
         }
     });
 
-    var interval = 0;
-
     container.on('mouseover', '.content .colorbox', function () {
         var id = jQuery(this).prop('id');
 
-        interval = setInterval(function () {
+        timeOuts['image'] = setInterval(function () {
             jQuery('#' + id).colorbox({open: true});
 
-            clearInterval(interval);
+            clearInterval(timeOuts['image']);
         }, 750);
     });
 
     container.on('mouseout', '.content .colorbox', function () {
-        clearInterval(interval);
+        clearInterval(timeOuts['image']);
     });
 
     container.on('click', '.build a.remove', function() {
@@ -222,7 +221,9 @@ jQuery(document).ready(function () {
         });
     });
 
-    function makeProjects(settings) {
+    function makeProjects(/*phpUnderControl.Settings*/settings) {
+        clearInterval(timeOuts['projects']);
+
         jQuery.getFeed({
             url: baseHref + 'service.php',
             data: {
@@ -272,7 +273,6 @@ jQuery(document).ready(function () {
                 });
 
                 container.html(content);
-
                 container.find('.content h2 time.timeago').timeago();
 
                 jQuery.ajax({
@@ -311,6 +311,13 @@ jQuery(document).ready(function () {
                 });
 
                 jQuery('#wrap').removeClass().addClass(wrapClass).addClass(settings.buildClass.replace("span", "wrap"));
+
+                // Set interval
+                timeOuts['projects'] = setInterval(function () {
+                    makeProjects(settings);
+
+                    clearInterval(timeOuts['projects']);
+                }, settings.refreshInterval * 60 * 1000);
             }
         });
     }
