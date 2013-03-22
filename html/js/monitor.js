@@ -344,8 +344,6 @@ jQuery(document).ready(function () {
 
                     clearInterval(timeOuts['projects']);
                 }, settings.refreshInterval * 60 * 1000);
-
-                i++;
             }
         });
     }
