@@ -156,7 +156,7 @@ a:focus {
 
 .build .navbar .pull-right > li > .dropdown-menu,
 .build .navbar .nav > li > .dropdown-menu.pull-right {
-    right: -10px;
+    right: -12px;
 }
 
 .build .navbar .dropdown-menu i {
