@@ -145,7 +145,7 @@ a:focus {
 }
 
 .build .navbar .nav > li > a > i {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
 .build .navbar .nav li.dropdown.open > .dropdown-toggle,
@@ -312,8 +312,9 @@ a:focus {
     font-size: 20px;
 }
 
-#cboxLoadedContent {
+#cboxLoadedContent img {
     border-radius: 10px;
+    border: 1px solid  rgba(0, 0, 0, 0.2);
 }
 
 #cboxLoadingGraphic {
