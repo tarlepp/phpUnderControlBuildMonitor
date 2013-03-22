@@ -172,6 +172,8 @@ jQuery(document).ready(function () {
 
                 dialog.on('click', '#fetchProjects', function () {
                     var form = dialog.find('form');
+                    var button = jQuery(this);
+                    var originalText = button.html();
 
                     jQuery.ajax({
                         data: {
@@ -180,6 +182,9 @@ jQuery(document).ready(function () {
                             url: form.find('#feedUrl').val()
                         },
                         beforeSend: function () {
+                            button.html('<em>' + originalText + '...</em>');
+                            button.addClass('disabled');
+
                             form.find('.control-group').removeClass('error');
                             form.find('.popover-container').each(function () {
                                 var element = jQuery(this).parent().find('.popover');
@@ -190,12 +195,18 @@ jQuery(document).ready(function () {
                             });
                         },
                         success: function (data) {
+                            button.html(originalText);
+                            button.removeClass('disabled');
+
                             var source = jQuery("#template-setup-projects").html();
                             var template = Handlebars.compile(source);
 
                             form.find('#projects').html(template(data));
                         },
                         error: function (jqXHR) {
+                            button.html(originalText);
+                            button.removeClass('disabled');
+
                             var data = JSON.parse(jqXHR.responseText);
                             var message = data.message;
 
