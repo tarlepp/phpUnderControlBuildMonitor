@@ -32,10 +32,12 @@ try {
     if (method_exists($error, 'makeJsonResponse')) {
         $error->makeJsonResponse();
     } else { // Base exception this is a failure by default
+        $message = str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getMessage());
+
         $data = array(
-            'message'   => 'Invalid exception thrown. ' . $error->getMessage(),
+            'message'   => 'Invalid exception thrown. ' . $message,
             'code'      => $error->getCode(),
-            'file'      => $error->getFile(),
+            'file'      => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getFile()),
             'line'      => $error->getLine(),
         );
 
