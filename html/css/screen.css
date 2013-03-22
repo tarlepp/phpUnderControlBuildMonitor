@@ -127,6 +127,13 @@ a:focus {
     white-space: nowrap;
 }
 
+.build .title a,
+.build .title a:hover,
+.build .title a:focus,
+.build .title a:visited {
+    color: #ffffff;
+}
+
 .build .navbar .nav {
     margin: 0 10px 0 0;
     padding: 0;
