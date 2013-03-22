@@ -13,11 +13,15 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>phpUnderControl Build Monitor</title>
 
+        <base href="<?php echo System::$baseHref; ?>">
+
+        <meta name="author" content="Tarmo Leppänen">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
         <link href="libs/colorbox/css/colorbox.css" rel="stylesheet" media="screen">
         <link href="libs/jquery-ui/css/smoothness/jquery-ui-1.10.2.custom.min.css" rel="stylesheet" media="screen">
@@ -81,7 +85,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                     <li class="muted">&middot;</li>
                     <li><a href="https://github.com/tarlepp/phpUnderControlBuildMonitor/issues" target="_blank">Issues</a></li>
                     <li class="muted">&middot;</li>
-                    <li><a href="https://github.com/tarlepp/" target="_blank">Tarmo Leppanen</a></li>
+                    <li><a href="https://github.com/tarlepp/" target="_blank">Tarmo Leppänen</a></li>
                 </ul>
             </div>
         </div>
