@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
         }
     });
 
+    var header = jQuery('#header');
     var container = jQuery('#container');
     var timeOuts = [];
 
@@ -61,7 +62,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    jQuery('#header').on('click', '#refreshLink', function() {
+    header.on('click', '#refreshLink', function() {
         jQuery.ajax({
             data: {
                 service: 'Setting'
@@ -72,7 +73,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    jQuery('#header').on('click', '#settingsLink', function(event) {
+    header.on('click', '#settingsLink', function(event) {
         event.preventDefault();
 
         var source = jQuery("#template-setup").html();
