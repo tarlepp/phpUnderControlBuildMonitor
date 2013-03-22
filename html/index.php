@@ -101,9 +101,16 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         <script id="template-build" type="text/x-handlebars-template">
             <div class="build {{class}} {{getStatusClass description}}">
                 <div class="title navbar">
-                    <ul class="nav pull-right">
-                        <li><a href="{{link}}" target="_blank" title="Open project into new tab"><i class="icon-search icon-white"></i></a></li>
+                    <ul class="nav pull-right dropdown" role="navigation">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-pencil icon-white"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#" class="remove" data-project="{{formatTitle title}}"><i class="icon-remove"></i>Remove this project</a></li>
+                                <li><a href="{{link}}" target="_blank"><i class="icon-search"></i>Open project into new tab</a></li>
+                            </ul>
+                        </li>
                     </ul>
+
                     <h2>{{formatTitle title}}</h2>
                 </div>
                 <div class="content">

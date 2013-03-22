@@ -135,11 +135,38 @@ a:focus {
 .build .navbar .nav > li > a {
     margin: 0;
     padding: 0;
+}
+
+.build .navbar .nav > li > a > i {
     opacity: 0.5;
 }
 
-.build .navbar .nav > li > a:hover {
+.build .navbar .nav li.dropdown.open > .dropdown-toggle,
+.build .navbar .nav li.dropdown.active > .dropdown-toggle,
+.build .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+    background-color: transparent;
+}
+
+.build .navbar .nav > li > a:hover i,
+.build .navbar .nav li.dropdown.open > .dropdown-toggle i,
+.build .navbar .nav li.dropdown.active > .dropdown-toggle i,
+.build .navbar .nav li.dropdown.open.active > .dropdown-toggle i {
     opacity: 1;
+}
+
+.build .navbar .pull-right > li > .dropdown-menu,
+.build .navbar .nav > li > .dropdown-menu.pull-right {
+    right: -10px;
+}
+
+.build .navbar .dropdown-menu i {
+    position: relative;
+    left: -5px;
+    top: -1px;
+}
+
+.build .dropdown-menu > li > a {
+    padding: 3px 10px;
 }
 
 .build .title,

@@ -136,7 +136,7 @@ class Service extends Handler
      *
      * @throws  Exception
      *
-     * @return  array
+     * @return  array   Stored settings
      */
     public function handleRequestSaveSettings()
     {
@@ -198,7 +198,7 @@ class Service extends Handler
     /**
      * Method fetches specified feed projects and returns them as an array.
      *
-     * @return  array
+     * @return  array   Stored settings
      */
     public function handleRequestGetFeedProjects()
     {
@@ -228,6 +228,35 @@ class Service extends Handler
                 'message'   => $error->getMessage(),
             );
         }
+    }
+
+    /**
+     * Method removes single project from current view
+     *
+     * @return  array
+     */
+    protected function handleRequestRemoveProject()
+    {
+        // Determine project that user want to remove
+        $project = (string)$this->request->get('project');
+
+        // Fetch settings from session
+        $settings = $this->request->getSession('settings', array());
+
+        // Determine project key to remove
+        $keyToRemove = array_search($project, $settings['projectsToShow']);
+
+        // Project key founded, so remove it and reset projects array
+        if ($keyToRemove !== false) {
+            unset($settings['projectsToShow'][$keyToRemove]);
+
+            $settings['projectsToShow'] = array_values($settings['projectsToShow']);
+        }
+
+        // Store current settings
+        $this->storeSettings($settings);
+
+        return $this->settings;
     }
 
     /**

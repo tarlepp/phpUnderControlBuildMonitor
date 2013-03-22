@@ -49,6 +49,19 @@ jQuery(document).ready(function () {
         clearInterval(interval);
     });
 
+    container.on('click', '.build a.remove', function() {
+        jQuery.ajax({
+            data: {
+                service: 'Setting',
+                action: 'RemoveProject',
+                project: jQuery(this).data('project')
+            },
+            success: function (/*phpUnderControl.Settings*/settings) {
+                makeProjects(settings);
+            }
+        });
+    });
+
     jQuery('#header').on('click', '#settingsLink', function (event) {
         event.preventDefault();
 
