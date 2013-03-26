@@ -9,6 +9,7 @@
 namespace phpUnderControlBuildMonitor\Core;
 
 use phpUnderControlBuildMonitor\Util\JSON;
+use phpUnderControlBuildMonitor\Util\Logger;
 
 /**
  * Exception -class
@@ -22,7 +23,7 @@ use phpUnderControlBuildMonitor\Util\JSON;
  *
  * @author      Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-class Exception extends \Exception
+class Exception extends \Exception implements Interfaces\Exception
 {
     /**
      * Write error log or not.
@@ -45,24 +46,36 @@ class Exception extends \Exception
         parent::__construct($message, $code, $previous);
 
         if ($this->writeLog) {
-            // TODO: implement log write
+            new Logger($this);
         }
+    }
+
+    /**
+     * Method makes JSON exception.
+     *
+     * @return  void
+     */
+    public function makeJsonResponse()
+    {
+        self::makeJsonError($this);
     }
 
     /**
      * Common method to convert current exception to "standard" JSON
      * error which is easily be usable in javascript.
      *
+     * @param   \Exception  $error  Exception where to make error
+     *
      * @return  void
      */
-    public function makeJsonResponse()
+    public static function makeJsonError(\Exception $error)
     {
         $data = array(
-            'message'   => $this->getMessage(),
-            'code'      => $this->getCode(),
-            'file'      => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getFile()),
-            'line'      => $this->getLine(),
-            'trace'     => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getTraceAsString()),
+            'message'   => $error->getMessage(),
+            'code'      => $error->getCode(),
+            'file'      => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getFile()),
+            'line'      => $error->getLine(),
+            'trace'     => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getTraceAsString()),
         );
 
         header("HTTP/1.0 400 Bad Request");

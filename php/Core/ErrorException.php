@@ -9,6 +9,7 @@
 namespace phpUnderControlBuildMonitor\Core;
 
 use phpUnderControlBuildMonitor\Util\JSON;
+use phpUnderControlBuildMonitor\Util\Logger;
 
 /**
  * ErrorException -class
@@ -21,7 +22,7 @@ use phpUnderControlBuildMonitor\Util\JSON;
  *
  * @author      Tarmo Leppänen <tarmo.leppanen@protacon.com>
  */
-class ErrorException extends \ErrorException
+class ErrorException extends \ErrorException implements Interfaces\Exception
 {
     /**
      * Write error log or not.
@@ -55,32 +56,17 @@ class ErrorException extends \ErrorException
         parent::__construct($message, $code, $severity, $filename, $lineNumber, $previous);
 
         if ($this->writeLog) {
-            // TODO: implement log write
+            new Logger($this);
         }
     }
 
     /**
-     * Common method to convert current exception to "standard" JSON
-     * error which is easily be usable in javascript.
+     * Method makes JSON exception.
      *
      * @return  void
      */
     public function makeJsonResponse()
     {
-        $data = array(
-            'message' => $this->getMessage(),
-            'code'    => $this->getCode(),
-            'file'    => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getFile()),
-            'line'    => $this->getLine(),
-            'trace'   => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $this->getTraceAsString()),
-        );
-
-        header("HTTP/1.0 400 Bad Request");
-
-        JSON::makeHeaders();
-
-        echo JSON::encode(array('error' => $data));
-
-        exit(0);
+        Exception::makeJsonError($this);
     }
 }

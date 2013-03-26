@@ -28,7 +28,11 @@ try {
     // Handle current request via Router
     Router::handleRequest($request);
 } catch (\Exception $error) {
-    // Exception that was thrown in phpUnderControlBuildMonitor system
+    /**
+     * Exception that was thrown in phpUnderControlBuildMonitor system
+     *
+     * @var $error \phpUnderControlBuildMonitor\Core\Exception
+     */
     if (method_exists($error, 'makeJsonResponse')) {
         $error->makeJsonResponse();
     } else { // Base exception this is a failure by default
@@ -39,6 +43,7 @@ try {
             'code'      => $error->getCode(),
             'file'      => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getFile()),
             'line'      => $error->getLine(),
+            'trace'     => str_replace(System::$basePath, DIRECTORY_SEPARATOR, $error->getTraceAsString()),
         );
 
         header("HTTP/1.0 400 Bad Request");
