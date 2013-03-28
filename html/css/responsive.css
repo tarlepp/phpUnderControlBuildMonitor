@@ -40,11 +40,69 @@
 }
 
 @media (min-width: 1200px) {
+    .build.span3 .title {
+        min-height: 20px;
+    }
+
+    .build.span3 .title h2 {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .build.span3 .navbar .nav > li > a > i {
+        top: 0px;
+    }
+
+    .build.span3 .content .status,
+    .build.span3 .content .image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .build.span3 .content .info h2,
+    .build.span3 .content .info h3 {
+        margin: 10px 0 0;
+        font-size: 16px;
+        line-height: 16px;
+    }
 }
 
 @media (max-width: 1200px) {
     .responsiveWidth:before {
         content: '979px < X < 1200px';
+    }
+
+    .build.span4 .title,
+    .build.span3 .title {
+        min-height: 20px;
+    }
+
+    .build.span4 .title h2,
+    .build.span3 .title h2 {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .build.span4 .navbar .nav > li > a > i,
+    .build.span3 .navbar .nav > li > a > i {
+        top: 0px;
+    }
+
+    .build.span4 .content .status,
+    .build.span4 .content .image,
+    .build.span3 .content .status,
+    .build.span3 .content .image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .build.span4 .content .info h2,
+    .build.span4 .content .info h3,
+    .build.span3 .content .info h2,
+    .build.span3 .content .info h3 {
+        margin: 10px 0 0;
+        font-size: 16px;
+        line-height: 16px;
     }
 }
 
@@ -74,6 +132,32 @@
     #header.container-fluid {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .build.span6 .title {
+        min-height: 20px;
+    }
+
+    .build.span6 .title h2 {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .build.span6 .navbar .nav > li > a > i {
+        top: 0px;
+    }
+
+    .build.span6 .content .status,
+    .build.span6 .content .image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .build.span6 .content .info h2,
+    .build.span6 .content .info h3 {
+        margin: 10px 0 0;
+        font-size: 16px;
+        line-height: 16px;
     }
 
     .build.span3 .title h2 {
@@ -118,6 +202,18 @@
 
     .build[class*="span"] .content .image {
         display: inline;
+    }
+
+    .build .title {
+        min-height: 20px;
+    }
+
+    .build .title h2 {
+        line-height: 20px;
+    }
+
+    .build .navbar .nav > li > a > i {
+        top: 0px;
     }
 
     #wrap.wrap3 .container-builds .row-fluid .build[class*="span"],

@@ -113,10 +113,8 @@ a:focus {
 }
 
 .build .title h2 {
-    position: relative;
-    top: 1px;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 20px;
+    line-height: 25px;
     margin: 0 25px 0 8px;
     padding: 0;
     font-weight: normal;
@@ -145,6 +143,8 @@ a:focus {
 }
 
 .build .navbar .nav > li > a > i {
+    position: relative;
+    top: 2px;
     opacity: 0.4;
 }
 
@@ -182,7 +182,7 @@ a:focus {
 }
 
 .build .title {
-    min-height: 20px;
+    min-height: 25px;
     margin: 0;
     padding: 5px 0 3px 0;
     border-bottom: 0px;
@@ -206,11 +206,15 @@ a:focus {
 .build .content .info h3 {
     padding: 0;
     margin: 10px 0 0;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 20px;
+    line-height: 30px;
     white-space: nowrap;
     text-shadow: 1px 1px 0 #FFFFFF;
     overflow: hidden;
+}
+
+.build .content .info h3 {
+    margin-top: 5px;
 }
 
 .build .content a.colorbox {
@@ -219,8 +223,8 @@ a:focus {
 
 .build .content .status,
 .build .content .image {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
 }
 
 .build .content .status {
