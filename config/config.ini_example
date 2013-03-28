@@ -1,0 +1,10 @@
+;
+; Default config for phpUnderControlBuildMonitor
+;
+; feedUrl           = phpUnderControl feed URL to use by default
+; buildsPerRow      = How many builds are shown per row
+; refreshInterval   = Refresh interval in minutes
+;
+feedUrl         = 'http://your_phpundercontroler_feed_url/'
+buildsPerRow    = 3
+refreshInterval = 10

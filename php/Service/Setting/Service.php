@@ -10,6 +10,7 @@ namespace phpUnderControlBuildMonitor\Service\Setting;
 
 use phpUnderControlBuildMonitor\Service\Exception;
 use phpUnderControlBuildMonitor\Service\Handler;
+use phpUnderControlBuildMonitor\Util\Config;
 use phpUnderControlBuildMonitor\Util\JSON;
 
 /**
@@ -95,9 +96,9 @@ class Service extends Handler
         // HTTP status code is not 200/OK
         if ($status !== 200) {
             $message = sprintf(
-                "HTTP request error with status code: %d. Response: %s",
+                "HTTP request error %d<br />%s",
                 $status,
-                $content
+                strip_tags($content)
             );
 
             throw new Exception($message);
@@ -361,15 +362,30 @@ class Service extends Handler
     protected function initializeRequest()
     {
         // Fetch settings
-        $settings = $this->request->getSession('settings', array());
+        $settings = array(); // $this->request->getSession('settings', array());
 
         // Settings are not yet set, so make default settings
         if (empty($settings)) {
+            $feedUrl = $this->settings['feedUrl'];
+            $buildsPerRow = $this->settings['buildsPerRow'];
+            $refreshInterval = $this->settings['refreshInterval'];
+
+            // Try to read local configuration file
+            try {
+                $config = Config::readIni('config.ini');
+
+                $feedUrl = isset($config['feedUrl']) ? $config['feedUrl'] : $feedUrl;
+                $buildsPerRow = isset($config['buildsPerRow']) ? $config['buildsPerRow'] : $buildsPerRow;
+                $refreshInterval = isset($config['refreshInterval']) ? $config['refreshInterval'] : $refreshInterval;
+            } catch (\Exception $error) {
+                // Silently suppress this error
+            }
+
             $settings = array(
-                'feedUrl'           => $this->baseHref . $this->settings['feedUrl'],
-                'buildsPerRow'      => $this->settings['buildsPerRow'],
-                'refreshInterval'   => $this->settings['refreshInterval'],
-                'projectsToShow'    => $this->getProjects($this->baseHref . 'feed.xml'),
+                'feedUrl'           => $feedUrl,
+                'buildsPerRow'      => $buildsPerRow,
+                'refreshInterval'   => $refreshInterval,
+                'projectsToShow'    => $this->getProjects($feedUrl),
             );
         }
 
