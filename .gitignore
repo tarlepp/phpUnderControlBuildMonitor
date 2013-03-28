@@ -2,3 +2,4 @@ html/images/fails/*.jpg
 html/images/fails/*.png
 html/images/success/*.jpg
 html/images/success/*.png
+config/*.ini
