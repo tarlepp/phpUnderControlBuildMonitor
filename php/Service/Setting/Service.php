@@ -362,7 +362,7 @@ class Service extends Handler
     protected function initializeRequest()
     {
         // Fetch settings
-        $settings = array(); // $this->request->getSession('settings', array());
+        $settings = $this->request->getSession('settings', array());
 
         // Settings are not yet set, so make default settings
         if (empty($settings)) {
