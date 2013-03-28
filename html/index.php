@@ -144,7 +144,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 <div class="alert alert-error">
                     <h3>Error</h3>
                     <p>
-                        {{message}}
+                        {{{message}}}
                     </p>
                     <h3>Information</h3>
                     <pre class="pre-scrollable text-mini">File: {{file}}<br />Line: {{line}}</pre>
@@ -159,7 +159,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                 <div class="alert alert-error">
                     <h3>Error</h3>
                     <p>
-                        {{message}}
+                        {{{message}}}
                     </p>
                     <h3>Information</h3>
                     <pre class="pre-scrollable text-mini">HTTP status {{status}}</pre>
