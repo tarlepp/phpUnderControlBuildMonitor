@@ -51,7 +51,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
                                 <span class="icon-bar"></span>
                             </button>
 
-                            <a class="brand" href="index.html">phpUnderControl Build Monitor</a>
+                            <a class="brand" href="<?php echo System::$baseHref; ?>">phpUnderControl Build Monitor</a>
 
                             <div class="responsiveWidth"></div>
 
