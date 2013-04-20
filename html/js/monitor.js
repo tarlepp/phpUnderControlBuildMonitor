@@ -12,6 +12,14 @@ jQuery(document).ready(function () {
         }
     });
 
+    /*
+    var element = jQuery('#lastUpdate');
+    var date = new Date();
+
+    element.attr('title', date.toISOString());
+    element.timeago();
+    */
+
     var header = jQuery('#header');
     var container = jQuery('#container');
     var timeOuts = [];
@@ -333,6 +341,8 @@ jQuery(document).ready(function () {
                         container.html(content);
                         container.find('.content h2 time.timeago').timeago();
                         container.find('.content .colorbox').colorbox({opacity: 0.8, maxHeight: '90%'});
+
+                        updateTime();
                     }
                 });
 
@@ -378,9 +388,19 @@ jQuery(document).ready(function () {
                 else json[n.name] = n.value || '';
             }
         });
+
         return json;
     };
 });
+
+function updateTime() {
+    var date = new Date();
+    var element = jQuery('<time datetime="' + date.toISOString() + '">' + date.toISOString() + '</time>');
+
+    element.timeago();
+
+    jQuery('#lastUpdate').html(element);
+}
 
 function isJsonString(string) {
     try {

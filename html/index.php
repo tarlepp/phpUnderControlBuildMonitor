@@ -55,6 +55,8 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
                             <div class="responsiveWidth"></div>
 
+                            <div id="lastUpdate" class="brand lastUpdate"></div>
+
                             <div id="mainNavigation" class="nav-collapse collapse">
                                 <ul class="nav">
 
@@ -62,10 +64,10 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
 
                                 <ul class="nav pull-right">
                                     <li>
-                                        <a href="#" id="refreshLink">Refresh</a>
+                                        <a href="javascript: void(0);" id="refreshLink">Refresh</a>
                                     </li>
                                     <li>
-                                        <a href="#" id="settingsLink">Settings</a>
+                                        <a href="javascript: void(0);" id="settingsLink">Settings</a>
                                     </li>
                                 </ul>
                             </div>
@@ -109,14 +111,14 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
             <div class="build {{class}} {{getStatusClass description}}">
                 <div class="title navbar">
                     <ul class="nav pull-right">
-                        <li><a href="#" class="remove" data-project="{{formatTitle title}}" title="Remove this project"><i class="icon-remove icon-white"></i></a></li>
+                        <li><a href="javascript: void(0);" class="remove" data-project="{{formatTitle title}}" title="Remove this project"><i class="icon-remove icon-white"></i></a></li>
                     </ul>
                     <h2><a href="{{link}}" target="_blank" title="Open project into new tab">{{formatTitle title}}</a></h2>
                 </div>
                 <div class="content">
                     <div class="status pull-left"></div>
                     <div class="image pull-right">
-                        <a id="href_{{index}}" href="#" class="colorbox" title="{{description}}"><img id="image_{{index}}" src="#" /></a>
+                        <a id="href_{{index}}" href="javascript: void(0);" class="colorbox" title="{{description}}"><img id="image_{{index}}" src="javascript: void(0);" /></a>
                     </div>
                     <div class="info">
                         <h2><time class="timeago" datetime="{{updated}}">{{updated}}</time></h2>

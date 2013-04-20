@@ -440,3 +440,18 @@ a:focus {
     padding: 7px;
     border-radius: 6px;
 }
+
+.lastUpdate {
+    position: absolute;
+    text-align: center;
+    float: left;
+    width: 300px;
+    left: 50%;
+}
+
+.lastUpdate.brand {
+    padding: 10px 0;
+    margin-left: -150px;
+    color: #ffffff;
+    font-size: 30px;
+}
