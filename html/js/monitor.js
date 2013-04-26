@@ -105,7 +105,7 @@ jQuery(document).ready(function () {
                 var buttons = [
                     {
                         label: 'Close',
-                        class: 'btn'
+                        class: 'btn pull-left'
                     },
                     {
                         label: 'Save settings',
@@ -459,7 +459,7 @@ function handleError(jqXHR, exception) {
 
     bootbox.dialog(template(templateData), {
         "label": "Close",
-        "class": "btn"
+        "class": "btn pull-left"
     }, {header: 'Oh noes, error occurred'});
 }
 
