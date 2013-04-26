@@ -96,7 +96,6 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         </div>
 
         <script src="libs/jquery/jquery-1.9.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-migrate-1.1.1.min.js"></script>
         <script src="libs/jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/bootbox/bootbox.min.js"></script>
