@@ -312,7 +312,7 @@ jQuery(document).ready(function () {
                     content += template({builds: item});
                 });
 
-                content = jQuery(content);
+                content = jQuery('<div/>').html(content).contents();
 
                 jQuery.ajax({
                     data: {

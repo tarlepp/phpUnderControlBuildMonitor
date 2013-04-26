@@ -99,7 +99,7 @@ require_once dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . "php" . DIRECTOR
         <script src="libs/jquery-ui/js/jquery-ui-1.10.2.custom.min.js"></script>
         <script src="libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="libs/bootbox/bootbox.min.js"></script>
-        <script src="libs/jFeed/jquery.jfeed.pack.js"></script>
+        <script src="libs/jFeed/jquery.jfeed.js"></script>
         <script src="libs/handlebars/handlebars.js"></script>
         <script src="libs/timeago/jquery.timeago.js"></script>
         <script src="libs/colorbox/js/jquery.colorbox-min.js"></script>
