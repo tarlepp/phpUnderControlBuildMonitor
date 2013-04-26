@@ -1,24 +1,28 @@
 jQuery(document).ready(function () {
+    var params = {};
+
+    if (location.search) {
+        var parts = location.search.substring(1).split('&');
+
+        for (var i = 0; i < parts.length; i++) {
+            var nv = parts[i].split('=');
+            if (!nv[0]) continue;
+            params[nv[0]] = nv[1] || true;
+        }
+    }
+
     // Common AJAX setup
     jQuery.ajaxSetup({
         url: baseHref + 'service.php',
-        data: {
+        data: jQuery.extend({
             token: csrfToken
-        },
+        }, params),
         dataType: "json",
         type: "post",
-        error: function (jqXHR, exception) {
+        error: function(jqXHR, exception) {
             handleError(jqXHR, exception);
         }
     });
-
-    /*
-    var element = jQuery('#lastUpdate');
-    var date = new Date();
-
-    element.attr('title', date.toISOString());
-    element.timeago();
-    */
 
     var header = jQuery('#header');
     var container = jQuery('#container');
@@ -76,6 +80,9 @@ jQuery(document).ready(function () {
         jQuery.ajax({
             data: {
                 service: 'Setting'
+            },
+            error: function(jqXHR, exception) {
+                location.reload();
             },
             success: function (/*phpUnderControl.Settings*/settings) {
                 makeProjects(settings);

@@ -381,6 +381,8 @@ class Service extends Handler
                 // Silently suppress this error
             }
 
+            $buildsPerRow = $this->request->get('buildsPerRow', $buildsPerRow);
+
             $settings = array(
                 'feedUrl'           => $feedUrl,
                 'buildsPerRow'      => $buildsPerRow,
@@ -468,8 +470,26 @@ class Service extends Handler
         // Initialize output
         $output = array();
 
+        $group = $this->request->get('group', false);
+
         // Iterate RSS feed items
         foreach ($xml->channel->item as $item) {
+            if ($group !== false) {
+                $terms = array_map('mb_strtolower', explode(',', $group));
+
+                $founded = false;
+
+                foreach ($terms as $term) {
+                    if (mb_strpos(mb_strtolower($item->title), $term) !== false) {
+                        $founded = true;
+                    }
+                }
+
+                if ($founded !== true) {
+                    continue;
+                }
+            }
+
             $output[] = mb_substr($item->title, 0, mb_strpos($item->title, ' '));
         }
 
